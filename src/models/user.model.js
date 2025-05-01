@@ -52,7 +52,6 @@ class UserModel {
       // Generate access and refresh tokens
       const access_token = signAccessToken({ id: user._id });
       const refresh_token = signRefreshToken({ id: user._id });
-      console.log(refresh_token)
 
       // Update the user's refresh token in the database
       await this.collection().updateOne(

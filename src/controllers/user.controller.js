@@ -63,17 +63,15 @@ class UserController {
   static async checkToken(req, res, next) {
     try {
       // Check if the access token is present in the request headers
-      const { refresh_token } = req.cookies;
+      const { refresh_token } = req.user;
 
       // If the access token is not present, throw an error
       if (!refresh_token) {
         throw { name: "Unauthorized", message: "Refresh token is required." };
       }
 
-      const token = refresh_token.split(' ');
-
       // Check if the refresh token is valid
-      const { access_token } = await UserModel.checkToken(token[1]);
+      const { access_token } = await UserModel.checkToken(refresh_token);
 
       // Set the access token in the response cookies
       res.cookie('access_token', `Bearer ${access_token}`, {
@@ -93,17 +91,15 @@ class UserController {
   static async logout(req, res, next) {
     try {
       // Check if the refresh token is present in the request headers
-      const { refresh_token } = req.cookies;
+      const { refresh_token } = req.user;
 
       // If the refresh token is not present, throw an error
       if (!refresh_token) {
         throw { name: "Unauthorized", message: "Refresh token is required." };
       }
 
-      const token = refresh_token.split(' ');
-
       // Check if the refresh token is valid
-      const result = await UserModel.logout(token[1]);
+      const result = await UserModel.logout(refresh_token);
 
       // Clear the cookies
       res.clearCookie('access_token');
