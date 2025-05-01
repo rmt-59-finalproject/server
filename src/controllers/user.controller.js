@@ -89,6 +89,32 @@ class UserController {
       next(error);
     }
   }
+
+  static async logout(req, res, next) {
+    try {
+      // Check if the refresh token is present in the request headers
+      const { refresh_token } = req.cookies;
+
+      // If the refresh token is not present, throw an error
+      if (!refresh_token) {
+        throw { name: "Unauthorized", message: "Refresh token is required." };
+      }
+
+      const token = refresh_token.split(' ');
+
+      // Check if the refresh token is valid
+      const result = await UserModel.logout(token[1]);
+
+      // Clear the cookies
+      res.clearCookie('access_token');
+      res.clearCookie('refresh_token');
+      res.status(200).json({
+        message: result.message,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = UserController;

@@ -98,6 +98,30 @@ class UserModel {
       throw error;
     }
   }
+
+  static async logout(refresh_token) {
+    try {
+      // Check if the user with the provided refresh token exists
+      const user = await this.collection().findOne({ refresh_token });
+
+      // If user does not exist, throw an error
+      if (!user) {
+        throw { name: "Unauthorized", message: "Invalid refresh token." };
+      }
+
+      // Remove the refresh token from the database
+      await this.collection().updateOne(
+        { refresh_token },
+        { $unset: { refresh_token: null } }
+      );
+
+      return {
+        message: "User logout successfully!"
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = UserModel;
