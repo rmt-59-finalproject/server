@@ -59,6 +59,36 @@ class UserController {
       next(error);
     }
   }
+
+  static async checkToken(req, res, next) {
+    try {
+      // Check if the access token is present in the request headers
+      const { refresh_token } = req.cookies;
+
+      // If the access token is not present, throw an error
+      if (!refresh_token) {
+        throw { name: "Unauthorized", message: "Refresh token is required." };
+      }
+
+      const token = refresh_token.split(' ');
+
+      // Check if the refresh token is valid
+      const { access_token } = await UserModel.checkToken(token[1]);
+
+      // Set the access token in the response cookies
+      res.cookie('access_token', `Bearer ${access_token}`, {
+        httpOnly: true,
+        secure: true,
+        maxAge: 60 * 60 * 1000
+      });
+
+      res.status(200).json({
+        message: "Token is valid.",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = UserController;

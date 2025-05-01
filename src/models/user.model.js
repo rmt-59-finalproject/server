@@ -1,6 +1,6 @@
 const db = require("../config/mongodb");
 const { hashPassword, comparePassword } = require("../helpers/bcrypt");
-const { signAccessToken, signRefreshToken } = require("../helpers/jwt");
+const { signAccessToken, signRefreshToken, verifyRefreshToken } = require("../helpers/jwt");
 
 class UserModel {
   static collection() {
@@ -65,6 +65,35 @@ class UserModel {
         refresh_token,
         role: user.role
       };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async checkToken(refresh_token) {
+    try {
+      // Check if user with the provided refresh token exists
+      const user = await this.collection().findOne({ refresh_token });
+
+      // If user does not exist, throw an error
+      if (!user) {
+        throw { name: "Unauthorized", message: "Invalid refresh token." };
+      }
+
+      // Verify the refresh token
+      const payload = verifyRefreshToken(refresh_token);
+
+      // If the refresh token is invalid, throw an error
+      if (!payload) {
+        throw { name: "Unauthorized", message: "Invalid refresh token." };
+      }
+
+      // Generate a new access token
+      const access_token = signAccessToken({ id: payload.id });
+
+      return {
+        access_token,
+      }
     } catch (error) {
       throw error;
     }
