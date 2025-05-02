@@ -66,7 +66,36 @@ class OrderModel {
         { returnDocument: 'after' }
       )
 
+      if (!order) {
+        throw { name: 'NotFound', message: 'Order not found!' }
+      }
+
       return order;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async patchOrderDriver(id, driverId) {
+    try {
+      const driver = await db.collection("users").findOne({ _id: new ObjectId(driverId) });
+      if (!driver) {
+        throw { name: 'NotFound', message: 'Driver not found!' }
+      }
+
+      const order = await this.collection().findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $set: { driverId: new ObjectId(driverId) } },
+        { returnDocument: 'after' }
+      )
+
+      if (!order) {
+        throw { name: 'NotFound', message: 'Order not found!' }
+      }
+
+      return {
+        driver
+      }
     } catch (error) {
       throw error;
     }

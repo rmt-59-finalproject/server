@@ -7,13 +7,21 @@
 
 List of available endpoints.
 
-- [1. POST /api/register](#1-post-apiregister)
-- [2. POST /api/login](#2-post-apilogin)
-- [3. GET /api/login](#3-get-apilogin)
-- [4. GET /api/logout](#4-get-apilogout)
-- [Global Error](#global-error)
+- [User](#user)
+  - [1. POST /api/register](#1-post-apiregister)
+  - [2. POST /api/login](#2-post-apilogin)
+  - [3. GET /api/login](#3-get-apilogin)
+  - [4. GET /api/logout](#4-get-apilogout)
+- [Orders](#orders)
+  - [5. GET](#5-get)
+- [Errors](#errors)
+  - [Global Error](#global-error)
 
 &nbsp;
+
+# User
+
+Endpoint for authentication.
 
 ## 1. POST /api/register
 
@@ -202,6 +210,16 @@ _Response (401 - Unauthorized)_
   "message": "Invalid refresh token."
 }
 ```
+
+# Orders
+
+Endpoint to interact with orders.
+
+## 5. GET
+
+# Errors
+
+Global error response.
 
 ## Global Error
 

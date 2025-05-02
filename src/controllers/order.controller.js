@@ -54,9 +54,27 @@ class OrderController {
       const order = await OrderModel.patchOrderStatus(id, status);
 
       res.status(200).json({
-        message: `Successfully update order status to ${status}`,
-        order
+        message: `Successfully update order status to ${order.status}`
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async updateOrderDriver(req, res, next) {
+    try {
+      const { id } = req.params;
+      if (!req.body) {
+        throw { name: 'BadRequest', message: 'Driver is required.' }
+      }
+
+      const { driverId } = req.body;
+
+      const { driver } = await OrderModel.patchOrderDriver(id, driverId);
+
+      res.status(200).json({
+        message: `Successfully assign order to ${driver.username}`
+      })
     } catch (error) {
       next(error);
     }
