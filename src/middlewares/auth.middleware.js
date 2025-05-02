@@ -48,6 +48,8 @@ async function authWarehouse(req, res, next) {
     if (req.user.role !== 'warehouse') {
       throw { name: 'Forbidden', message: 'You are not authorized to access this resource.' };
     }
+
+    next();
   } catch (error) {
     next(error);
   }
