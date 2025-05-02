@@ -20,6 +20,10 @@ function errorMiddleware(error, req, res, next) {
   if (error.name === 'Unauthorized') {
     return res.status(401).json({ message: error.message })
   }
+  
+  if (error.name === 'Conflict') {
+    return res.status(409).json({ message: error.message })
+  }
 
   if (error.name === 'InternalServerError') {
     return res.status(500).json({ message: error.message })

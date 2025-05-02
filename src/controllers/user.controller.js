@@ -34,11 +34,11 @@ class UserController {
       // Extract token & role if user successfully login
       const { access_token, refresh_token, role } = await UserModel.login(username, password);
 
-      // Send access_token via cookie that expires in 1 hour
+      // Send access_token via cookie that expires in 8 hours
       res.cookie('access_token', `Bearer ${access_token}`, {
         httpOnly: true,
         secure: true,
-        maxAge: 60 * 60 * 1000
+        maxAge: 8 * 60 * 60 * 1000
       });
       
       // Send refresh_token via cookie that expires in 1 day
@@ -67,7 +67,7 @@ class UserController {
 
       // If the access token is not present, throw an error
       if (!refresh_token) {
-        throw { name: "Unauthorized", message: "Refresh token is required." };
+        throw { name: "BadRequest", message: "Please login first!" };
       }
 
       // Check if the refresh token is valid
@@ -77,7 +77,7 @@ class UserController {
       res.cookie('access_token', `Bearer ${access_token}`, {
         httpOnly: true,
         secure: true,
-        maxAge: 60 * 60 * 1000
+        maxAge: 8 * 60 * 60 * 1000
       });
 
       res.status(200).json({
@@ -95,7 +95,7 @@ class UserController {
 
       // If the refresh token is not present, throw an error
       if (!refresh_token) {
-        throw { name: "Unauthorized", message: "Refresh token is required." };
+        throw { name: "BadRequest", message: "Please login first!" };
       }
 
       // Check if the refresh token is valid
