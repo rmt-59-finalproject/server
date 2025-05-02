@@ -1,21 +1,17 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=18604804&assignment_repo_type=AssignmentRepo)
 
+<!-- omit in toc -->
 # Stockify API Documentation
 
 ### Endpoints :
 
 List of available endpoints.
 
-### User
-
-- [Stockify API Documentation](#stockify-api-documentation)
-    - [Endpoints :](#endpoints-)
-    - [User](#user)
-  - [1. POST /api/register](#1-post-apiregister)
-  - [2. POST /api/login](#2-post-apilogin)
-  - [3. GET /api/login](#3-get-apilogin)
-  - [4. GET /api/logout](#4-get-apilogout)
-  - [Global Error](#global-error)
+- [1. POST /api/register](#1-post-apiregister)
+- [2. POST /api/login](#2-post-apilogin)
+- [3. GET /api/login](#3-get-apilogin)
+- [4. GET /api/logout](#4-get-apilogout)
+- [Global Error](#global-error)
 
 &nbsp;
 
@@ -57,7 +53,7 @@ _Response (409 - Conflict)_
 
 ```json
 {
-  "message": "User already exist!"
+  "message": "User already exists!"
 }
 ```
 
