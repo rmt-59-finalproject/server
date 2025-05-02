@@ -1,12 +1,13 @@
-const router = require('express').Router();
+const router = require("express").Router();
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) => {
   res.status(200).json({
-    message: 'Stockify API',
-    version: '1.0.0'
+    message: "Stockify API",
+    version: "1.0.0",
   });
-})
+});
 
 router.use(require('./user.routes'));
+router.use(require("./inventory.routes"));
 
 module.exports = router;
