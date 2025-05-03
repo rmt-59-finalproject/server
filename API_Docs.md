@@ -1,19 +1,26 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=18604804&assignment_repo_type=AssignmentRepo)
 
 <!-- omit in toc -->
+
 # Stockify API Documentation
 
 ### Endpoints :
 
 List of available endpoints.
 
+- [Stockify API Documentation](#stockify-api-documentation)
+    - [Endpoints :](#endpoints-)
 - [User](#user)
   - [1. POST /api/register](#1-post-apiregister)
   - [2. POST /api/login](#2-post-apilogin)
   - [3. GET /api/login](#3-get-apilogin)
   - [4. GET /api/logout](#4-get-apilogout)
 - [Orders](#orders)
-  - [5. GET](#5-get)
+  - [5. GET /api/orders](#5-get-apiorders)
+  - [6. GET /api/orders/:id](#6-get-apiordersid)
+  - [7. POST /api/orders](#7-post-apiorders)
+  - [8. PATCH /api/orders/:id](#8-patch-apiordersid)
+  - [9. /api/orders/:id/driver](#9-apiordersiddriver)
 - [Errors](#errors)
   - [Global Error](#global-error)
 
@@ -27,7 +34,7 @@ Endpoint for authentication.
 
 Description:
 
-- Create user
+> Create user
 
 Request:
 
@@ -69,7 +76,7 @@ _Response (409 - Conflict)_
 
 Description:
 
-- User login
+> User login
 
 Request:
 
@@ -125,7 +132,7 @@ _Response (401 - Unauthorized)_
 
 Description:
 
-- Refresh user access_token
+> Refresh user access_token
 
 Request:
 
@@ -175,7 +182,7 @@ _Response (401 - Unauthorized)_
 
 Description:
 
-- User logout
+> User logout
 
 Request:
 
@@ -215,7 +222,281 @@ _Response (401 - Unauthorized)_
 
 Endpoint to interact with orders.
 
-## 5. GET
+## 5. GET /api/orders
+
+Description:
+
+> Read orders data
+
+Request:
+
+- params:
+
+```json
+{
+  "status": "requested" | "approved" | "in_transit" | "delivered" | "completed"
+}
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+[
+  {
+    "_id": "string",
+    "status": "requested" | "approved" | "in_transit" | "delivered" | "completed",
+    "items": [
+      {
+        "productId": "string",
+        "quantity": "number",
+        "checkedByDriver": "boolean",
+        "driverCheckTime": "date" | null,
+        "checkedByOutlet": "boolean",
+        "outletCheckTime": "date" | null
+      },
+      ...
+    ],
+    "createdAt": "date",
+    "updatedAt": "date",
+    "driver": {
+      "_id": "string",
+      "username": "string",
+      "role": "driver"
+    },
+    "outlet": {
+      "_id": "string",
+      "username": "string",
+      "role": "outlet"
+    }
+  },
+  ...
+]
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "No data found."
+}
+```
+
+## 6. GET /api/orders/:id
+
+Description:
+
+> Read order by ID
+
+Request:
+
+- params:
+
+```json
+{
+  "id": "string (required)"
+}
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "_id": "string",
+  "driver": {
+    "_id": "string",
+    "username": "string",
+    "role": "driver"
+  },
+  "outlet": {
+    "_id": "string",
+    "username": "string",
+    "role": "outlet"
+  },
+  "items": [
+    {
+      "name": "string",
+      "quantity": "number",
+      "unit": "string",
+      "category": "string",
+      "checkedByDriver": "boolean",
+      "driverCheckTime": "date" | null,
+      "checkedByOutlet": "boolean",
+      "outletCheckTime": "date" | null
+    },
+    ...
+  ],
+  "createdAt": "date",
+  "updatedAt": "date"
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Order not found!"
+}
+```
+
+## 7. POST /api/orders
+
+Description:
+
+> Create new order (from outlet)
+
+Request:
+
+- body:
+
+```json
+[
+  {
+    "productId": "string",
+    "quantity": "number"
+  },
+  ...
+]
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (201 - Created)_
+
+```json
+{
+  "message": "Successfully create new order."
+}
+```
+
+_Response (400 - Bad Requeset)_
+
+```json
+{
+  "message": "Items is required."
+}
+```
+
+## 8. PATCH /api/orders/:id
+
+Description:
+
+> Update order status
+
+Request:
+
+- body:
+
+```json
+{
+  "status": "requested" | "approved" | "in_transit" | "delivered" | "completed"
+}
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Successfully update order status to <status>"
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "message": "Updated status is required."
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Order not found!"
+}
+```
+
+## 9. /api/orders/:id/driver
+
+Description:
+
+> Update order assigned driver
+
+Request:
+
+- body:
+
+```json
+{
+  "driverId": "string (required)"
+}
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Successfully assign order to <driver username>"
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "message": "Driver is required."
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Driver not found!"
+}
+OR
+{
+  "message": "Order not found!"
+}
+```
 
 # Errors
 
@@ -236,6 +517,14 @@ _Response (403 - Forbidden)_
 ```json
 {
   "message": "You are not authorized."
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Invalid ID."
 }
 ```
 
