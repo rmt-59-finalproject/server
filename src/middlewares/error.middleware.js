@@ -1,3 +1,5 @@
+const { ZodError } = require("zod");
+
 function errorMiddleware(error, req, res, next) {
   console.log(error, "<<<<");
 
@@ -13,27 +15,41 @@ function errorMiddleware(error, req, res, next) {
     return res.status(401).json({ message: "Invalid token." });
   }
 
-  if (error.name === 'BadRequest') {
-    return res.status(400).json({ message: error.message })
-  }
-  
-  if (error.name === 'BSONError') {
-    return res.status(400).json({ message: "Invalid ID." })
+  if (error.name === "BadRequest") {
+    return res.status(400).json({ message: error.message });
   }
 
-  if (error.name === 'Unauthorized') {
-    return res.status(401).json({ message: error.message })
-  }
-  
-  if (error.name === 'Conflict') {
-    return res.status(409).json({ message: error.message })
+  if (error.name === "BSONError") {
+    return res.status(400).json({ message: "Invalid ID." });
   }
 
-  if (error.name === 'InternalServerError') {
-    return res.status(500).json({ message: error.message })
+  if (error.name === "Unauthorized") {
+    return res.status(401).json({ message: error.message });
   }
 
-  res.status(500).json({ message: 'Internal server error.' });
+  if (error.name === "Conflict") {
+    return res.status(409).json({ message: error.message });
+  }
+
+  if (error instanceof ZodError) {
+    const messages = error.errors[0].message.toLowerCase();
+    const path = error.errors[0].path[0];
+    const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+
+    return res
+      .status(400)
+      .json({ message: `${capitalize(path)} is ${messages}` });
+  }
+
+  if (error.name === "InvalidId") {
+    return res.status(400).json({ message: error.message });
+  }
+
+  if (error.name === "InternalServerError") {
+    return res.status(500).json({ message: error.message });
+  }
+
+  res.status(500).json({ message: "Internal server error." });
 }
 
 module.exports = errorMiddleware;

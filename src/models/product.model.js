@@ -44,9 +44,16 @@ class ProductModel {
     try {
       const validatedProduct = productSchema.parse(product);
 
-      const result = await this.collection().insertOne(validatedProduct);
+      const existingProduct = await this.collection().findOne({
+        name: validatedProduct.name,
+      });
+      if (existingProduct) {
+        throw { name: "Conflict", message: "This product already exists" };
+      }
 
-      return result;
+      await this.collection().insertOne(validatedProduct);
+
+      return validatedProduct;
     } catch (error) {
       throw error;
     }
