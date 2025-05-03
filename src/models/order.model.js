@@ -14,6 +14,48 @@ class OrderModel {
       throw error;
     }
   }
+
+  static async postOrder(items, outletId) {
+    try {
+      const newItem = items.map(item => ({
+        ...item,
+        productId: new ObjectId(item.productId),
+        checkedByDriver: false,
+        driverCheckTime: null,
+        checkedByOutlet: false,
+        outletCheckTime: null
+      }));
+
+      await this.collection().insertOne({
+        outletId: new ObjectId(outletId),
+        driverId: null,
+        status: 'requested',
+        items: newItem,
+        createdAt: new Date,
+        updatedAt: new Date
+      })
+
+      return {
+        message: 'Successfully create new order.'
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getOrderById(id) {
+    try {
+      const order = await this.collection().findOne({ _id: new ObjectId(id) });
+
+      if (!order) {
+        throw { name: 'NotFound', message: 'Order not found!' }
+      }
+
+      return order;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = OrderModel;
