@@ -15,16 +15,17 @@ List of available endpoints.
   - [2. POST /api/login](#2-post-apilogin)
   - [3. GET /api/login](#3-get-apilogin)
   - [4. GET /api/logout](#4-get-apilogout)
+  - [5. GET /api/users](#5-get-apiusers)
 - [Orders](#orders)
-  - [5. GET /api/orders](#5-get-apiorders)
-  - [6. GET /api/orders/:id](#6-get-apiordersid)
-  - [7. POST /api/orders](#7-post-apiorders)
-  - [8. PATCH /api/orders/:id](#8-patch-apiordersid)
-  - [9. PATCH /api/orders/:id/driver](#9-patch-apiordersiddriver)
+  - [6. GET /api/orders](#6-get-apiorders)
+  - [7. GET /api/orders/:id](#7-get-apiordersid)
+  - [8. POST /api/orders](#8-post-apiorders)
+  - [9. PATCH /api/orders/:id](#9-patch-apiordersid)
+  - [10. PATCH /api/orders/:id/driver](#10-patch-apiordersiddriver)
 - [Driver](#driver)
-  - [10. GET /driver/orders](#10-get-driverorders)
-  - [11. GET /driver/orders/:id](#11-get-driverordersid)
-  - [12. PATCH /driver/orders/:id](#12-patch-driverordersid)
+  - [11. GET /api/driver/orders](#11-get-apidriverorders)
+  - [12. GET /api/driver/orders/:id](#12-get-apidriverordersid)
+  - [13. PATCH /api/driver/orders/:id](#13-patch-apidriverordersid)
 - [Errors](#errors)
   - [Global Error](#global-error)
 
@@ -222,11 +223,49 @@ _Response (401 - Unauthorized)_
 }
 ```
 
+## 5. GET /api/users
+
+Description:
+
+> Read all users in database (warehouse only)
+
+Request:
+
+- params:
+
+```json
+{
+  "role (optional)": "warehouse" || "driver" || "outlet"
+}
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+[
+  {
+    "_id": "string",
+    "username": "string",
+    "name": "string",
+    "role": "string"
+  },
+  ...
+]
+```
+
 # Orders
 
 Endpoint to interact with orders.
 
-## 5. GET /api/orders
+## 6. GET /api/orders
 
 Description:
 
@@ -298,7 +337,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 6. GET /api/orders/:id
+## 7. GET /api/orders/:id
 
 Description:
 
@@ -364,7 +403,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 7. POST /api/orders
+## 8. POST /api/orders
 
 Description:
 
@@ -408,7 +447,7 @@ _Response (400 - Bad Requeset)_
 }
 ```
 
-## 8. PATCH /api/orders/:id
+## 9. PATCH /api/orders/:id
 
 Description:
 
@@ -456,7 +495,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 9. PATCH /api/orders/:id/driver
+## 10. PATCH /api/orders/:id/driver
 
 Description:
 
@@ -510,7 +549,7 @@ OR
 
 # Driver
 
-## 10. GET /driver/orders
+## 11. GET /api/driver/orders
 
 Description:
 
@@ -581,7 +620,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 11. GET /driver/orders/:id
+## 12. GET /api/driver/orders/:id
 
 Description:
 
@@ -647,7 +686,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 12. PATCH /driver/orders/:id
+## 13. PATCH /api/driver/orders/:id
 
 Description:
 

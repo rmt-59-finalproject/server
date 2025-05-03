@@ -40,7 +40,7 @@ class UserController {
         secure: true,
         maxAge: 8 * 60 * 60 * 1000
       });
-      
+
       // Send refresh_token via cookie that expires in 1 day
       res.cookie('refresh_token', `Bearer ${refresh_token}`, {
         httpOnly: true,
@@ -108,6 +108,18 @@ class UserController {
       res.status(200).json({
         message: result.message,
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async readAllUsers(req, res, next) {
+    try {
+      const { role } = req.body || {};
+
+      const users = await UserModel.getAllUsers(role);
+
+      res.status(200).json(users);
     } catch (error) {
       next(error);
     }
