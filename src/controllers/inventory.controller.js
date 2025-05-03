@@ -26,19 +26,6 @@ class InventoryController {
   static async createInventory(req, res, next) {
     const { name, stock, unit, category } = req.body;
     try {
-      if (!name) {
-        throw { name: "BadRequest", message: "Name is required" };
-      }
-      if (!stock) {
-        throw { name: "BadRequest", message: "Stock is required" };
-      }
-      if (!unit) {
-        throw { name: "BadRequest", message: "Unit is required" };
-      }
-      if (!category) {
-        throw { name: "BadRequest", message: "Category is required" };
-      }
-
       const inventory = await ProductModel.create({
         ...req.body,
         createdAt: new Date(),
