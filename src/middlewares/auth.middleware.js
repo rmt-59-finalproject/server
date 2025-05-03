@@ -69,7 +69,7 @@ async function authOutlet(req, res, next) {
 
 async function authDriver(req, res, next) {
   try {
-    if (req.user.role !== 'driver' || req.user.role !== 'warehouse') {
+    if (req.user.role !== 'driver' && req.user.role !== 'warehouse') {
       throw { name: 'Forbidden', message: 'You are not authorized to access this resource.' };
     }
 
