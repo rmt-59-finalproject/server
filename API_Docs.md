@@ -20,7 +20,11 @@ List of available endpoints.
   - [6. GET /api/orders/:id](#6-get-apiordersid)
   - [7. POST /api/orders](#7-post-apiorders)
   - [8. PATCH /api/orders/:id](#8-patch-apiordersid)
-  - [9. /api/orders/:id/driver](#9-apiordersiddriver)
+  - [9. PATCH /api/orders/:id/driver](#9-patch-apiordersiddriver)
+- [Driver](#driver)
+  - [10. GET /driver/orders](#10-get-driverorders)
+  - [11. GET /driver/orders/:id](#11-get-driverordersid)
+  - [12. PATCH /driver/orders/:id](#12-patch-driverordersid)
 - [Errors](#errors)
   - [Global Error](#global-error)
 
@@ -234,7 +238,7 @@ Request:
 
 ```json
 {
-  "status": "requested" | "approved" | "in_transit" | "delivered" | "completed"
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed"
 }
 ```
 
@@ -252,15 +256,18 @@ _Response (200 - OK)_
 [
   {
     "_id": "string",
-    "status": "requested" | "approved" | "in_transit" | "delivered" | "completed",
+    "status": "requested" || "approved" || "in_transit" || "delivered" || "completed",
     "items": [
       {
-        "productId": "string",
+        "_id": "string",
+        "name": "string",
         "quantity": "number",
+        "unit": "string",
+        "category": "string",
         "checkedByDriver": "boolean",
-        "driverCheckTime": "date" | null,
+        "driverCheckTime": "date" || null,
         "checkedByOutlet": "boolean",
-        "outletCheckTime": "date" | null
+        "outletCheckTime": "date" || null
       },
       ...
     ],
@@ -269,11 +276,13 @@ _Response (200 - OK)_
     "driver": {
       "_id": "string",
       "username": "string",
+      "name": "string",
       "role": "driver"
     },
     "outlet": {
       "_id": "string",
       "username": "string",
+      "name": "string",
       "role": "outlet"
     }
   },
@@ -330,14 +339,15 @@ _Response (200 - OK)_
   },
   "items": [
     {
+      "_id": "string",
       "name": "string",
       "quantity": "number",
       "unit": "string",
       "category": "string",
       "checkedByDriver": "boolean",
-      "driverCheckTime": "date" | null,
+      "driverCheckTime": "date" || null,
       "checkedByOutlet": "boolean",
-      "outletCheckTime": "date" | null
+      "outletCheckTime": "date" || null
     },
     ...
   ],
@@ -410,7 +420,7 @@ Request:
 
 ```json
 {
-  "status": "requested" | "approved" | "in_transit" | "delivered" | "completed"
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed"
 }
 ```
 
@@ -446,7 +456,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 9. /api/orders/:id/driver
+## 9. PATCH /api/orders/:id/driver
 
 Description:
 
@@ -493,6 +503,202 @@ _Response (404 - Not Found)_
   "message": "Driver not found!"
 }
 OR
+{
+  "message": "Order not found!"
+}
+```
+
+# Driver
+
+## 10. GET /driver/orders
+
+Description:
+
+> Read current driver order task
+
+Request:
+
+- params:
+
+```json
+{
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed"
+}
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+[
+  {
+    "_id": "string",
+    "driver": {
+      "_id": "string",
+      "username": "string",
+      "name": "string",
+      "role": "driver"
+    },
+    "outlet": {
+      "_id": "string",
+      "username": "string",
+      "name": "string",
+      "role": "outlet"
+    },
+    "items": [
+      {
+        "_id": "string",
+        "name": "string",
+        "quantity": "number",
+        "unit": "string",
+        "category": "string",
+        "checkedByDriver": "boolean",
+        "driverCheckTime": "date" || null,
+        "checkedByOutlet": "boolean",
+        "outletCheckTime": "date" || null
+      },
+      ...
+    ],
+    "createdAt": "date",
+    "updatedAt": "date"
+  },
+  ...
+]
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Order not found!"
+}
+```
+
+## 11. GET /driver/orders/:id
+
+Description:
+
+> Read order by ID based on driver task
+
+Request:
+
+- params:
+
+```json
+{
+  "id": "string - order ID (required)"
+}
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "_id": "string",
+  "driver": {
+    "_id": "string",
+    "username": "string",
+    "role": "driver"
+  },
+  "outlet": {
+    "_id": "string",
+    "username": "string",
+    "role": "outlet"
+  },
+  "items": [
+    {
+      "_id": "string",
+      "name": "string",
+      "quantity": "number",
+      "unit": "string",
+      "category": "string",
+      "checkedByDriver": "boolean",
+      "driverCheckTime": "date" || null,
+      "checkedByOutlet": "boolean",
+      "outletCheckTime": "date" || null
+    },
+    ...
+  ],
+  "createdAt": "date",
+  "updatedAt": "date"
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Order not found!"
+}
+```
+
+## 12. PATCH /driver/orders/:id
+
+Description:
+
+> Update item status in specific order based on driver task
+
+Request:
+
+- params:
+
+```json
+{
+  "id": "string - order ID (required)"
+}
+```
+
+- body:
+
+```json
+{
+  "productId": "string - productId (required)",
+  "status": "boolean - item status checked or not (required)"
+}
+```
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Checked <quantity> <unit> of <product name>."
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "message": "Product ID is required."
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
 {
   "message": "Order not found!"
 }
