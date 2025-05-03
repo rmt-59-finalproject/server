@@ -141,6 +141,7 @@ class OrderModel {
               },
               'items': {
                 '$push': {
+                  '_id': '$items.product._id',
                   'name': '$items.product.name',
                   'quantity': '$items.quantity',
                   'unit': '$items.product.unit',

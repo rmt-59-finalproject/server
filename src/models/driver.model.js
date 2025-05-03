@@ -56,6 +56,7 @@ class DriverModel {
             },
             'items': {
               '$push': {
+                '_id': '$items.product._id',
                 'name': '$items.product.name',
                 'quantity': '$items.quantity',
                 'unit': '$items.product.unit',
@@ -165,6 +166,7 @@ class DriverModel {
               },
               'items': {
                 '$push': {
+                  '_id': '$items.product._id',
                   'name': '$items.product.name',
                   'quantity': '$items.quantity',
                   'unit': '$items.product.unit',
@@ -192,6 +194,42 @@ class DriverModel {
       }
 
       return order[0];
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async updateItemStatus(driverId, id, productId, status) {
+    try {
+      const order = await this.collection().findOneAndUpdate(
+        {
+          _id: new ObjectId(id),
+          driverId: new ObjectId(driverId),
+          "items.productId": new ObjectId(productId)
+        },
+        {
+          $set: {
+            "items.$.checkedByDriver": status,
+            "items.$.driverCheckTime": new Date(),
+            updatedAt: new Date()
+          }
+        },
+        { returnDocument: 'after' }
+      );
+
+      if (!order) {
+        throw { name: 'NotFound', message: 'Order not found!' }
+      }
+
+      const item = await db.collection("products").findOne({ _id: new ObjectId(productId) });
+
+      return {
+        quantity: order.items.find(item =>
+          item.productId.equals(new ObjectId(productId))
+        )?.quantity,
+        name: item.name,
+        unit: item.unit
+      };
     } catch (error) {
       throw error;
     }
