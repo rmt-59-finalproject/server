@@ -4,14 +4,14 @@ class UserController {
   static async register(req, res, next) {
     try {
       // Extract data from request body
-      const { username, password, role } = req.body;
+      const { username, password, role, name } = req.body;
 
       // Validate input data
-      if (!username || !password || !role) {
+      if (!username || !password || !role || !name) {
         throw { name: 'BadRequest', message: 'All fields are required!' };
       }
 
-      await UserModel.createUser(username, password, role);
+      await UserModel.createUser(username, password, name, role);
 
       res.status(201).json({
         message: `User with role ${role} created successfully!`
@@ -32,7 +32,7 @@ class UserController {
       }
 
       // Extract token & role if user successfully login
-      const { access_token, refresh_token, role } = await UserModel.login(username, password);
+      const { access_token, refresh_token, role, name } = await UserModel.login(username, password);
 
       // Send access_token via cookie that expires in 8 hours
       res.cookie('access_token', `Bearer ${access_token}`, {
@@ -52,7 +52,8 @@ class UserController {
         message: 'User login successfully!',
         data: {
           username,
-          role
+          role,
+          name
         }
       });
     } catch (error) {

@@ -1,6 +1,7 @@
 require("dotenv").config();
 const { ObjectId } = require("mongodb");
 const db = require("../config/mongodb");
+const { hashPassword } = require("../helpers/bcrypt");
 
 (async function seedData() {
   try {
@@ -13,6 +14,7 @@ const db = require("../config/mongodb");
     const convertedData = data.map((item) => ({
       ...item,
       _id: new ObjectId(item._id),
+      password: hashPassword(item.password)
     }));
 
     const result = await collection.insertMany(convertedData);
