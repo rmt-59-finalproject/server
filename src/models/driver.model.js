@@ -45,6 +45,9 @@ class DriverModel {
         }, {
           '$group': {
             '_id': '$_id',
+            'orderId': {
+              '$first': '$orderId'
+            },
             'driver': {
               '$first': '$driver'
             },
@@ -53,6 +56,15 @@ class DriverModel {
             },
             'status': {
               '$first': '$status'
+            },
+            'notes': {
+              '$first': '$notes'
+            },
+            'createdAt': {
+              '$first': '$createdAt'
+            },
+            'updatedAt': {
+              '$first': '$updatedAt'
             },
             'items': {
               '$push': {
@@ -66,12 +78,6 @@ class DriverModel {
                 'checkedByOutlet': '$items.checkedByOutlet',
                 'outletCheckTime': '$items.outletCheckTime'
               }
-            },
-            'createdAt': {
-              '$first': '$createdAt'
-            },
-            'updatedAt': {
-              '$first': '$updatedAt'
             }
           }
         }, {
@@ -149,6 +155,9 @@ class DriverModel {
           }, {
             '$group': {
               '_id': '$_id',
+              'orderId': {
+                '$first': '$orderId'
+              },
               'driver': {
                 '$first': '$driver'
               },
@@ -157,6 +166,9 @@ class DriverModel {
               },
               'status': {
                 '$first': '$status'
+              },
+              'notes': {
+                '$first': '$notes'
               },
               'createdAt': {
                 '$first': '$createdAt'
