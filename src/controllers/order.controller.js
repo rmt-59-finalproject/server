@@ -3,7 +3,12 @@ const OrderModel = require("../models/order.model");
 class OrderController {
   static async readAllOrders(req, res, next) {
     try {
-      const data = await OrderModel.getAllOrders();
+      const { status } = req.query;
+      const data = await OrderModel.getAllOrders(status);
+
+      if (data.length === 0) res.status(404).json({
+        message: 'No orders found.'
+      });
 
       res.status(200).json(data)
     } catch (error) {

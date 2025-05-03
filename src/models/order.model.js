@@ -5,11 +5,51 @@ class OrderModel {
     return db.collection("orders");
   }
 
-  static async getAllOrders() {
+  static async getAllOrders(status) {
     try {
-      const data = await this.collection().find({}).toArray();
+      const pipeline = [
+        {
+          $lookup: {
+            from: "users",
+            localField: "driverId",
+            foreignField: "_id",
+            as: "driver"
+          }
+        },
+        { $unwind: "$driver" },
+        {
+          $lookup: {
+            from: "users",
+            localField: "outletId",
+            foreignField: "_id",
+            as: "outlet"
+          }
+        },
+        { $unwind: "$outlet" },
+        {
+          $project: {
+            driverId: 0,
+            outletId: 0,
+            "driver.password": 0,
+            "driver.refresh_token": 0,
+            "outlet.password": 0,
+            "outlet.refresh_token": 0
+          }
+        }
+      ];
 
-      return data
+      // Add the $match stage only if status is provided
+      if (status) {
+        pipeline.splice(4, 0, {
+          '$match': {
+            'status': status
+          }
+        });
+      }
+
+      const data = await this.collection().aggregate(pipeline).toArray();
+
+      return data;
     } catch (error) {
       throw error;
     }
@@ -45,13 +85,92 @@ class OrderModel {
 
   static async getOrderById(id) {
     try {
-      const order = await this.collection().findOne({ _id: new ObjectId(id) });
+      const order = await this.collection().aggregate(
+        [
+          {
+            $match: {
+              _id: new ObjectId(id)
+            }
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "driverId",
+              foreignField: "_id",
+              as: "driver"
+            }
+          },
+          {
+            $unwind: {
+              path: "$driver",
+              preserveNullAndEmptyArrays: false
+            }
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "outletId",
+              foreignField: "_id",
+              as: "outlet"
+            }
+          },
+          {
+            $unwind: {
+              path: "$outlet",
+              preserveNullAndEmptyArrays: false
+            }
+          },
+          {
+            $unwind: "$items"
+          },
+          {
+            $lookup: {
+              from: "products",
+              localField: "items.productId",
+              foreignField: "_id",
+              as: "items.product"
+            }
+          },
+          {
+            $unwind: "$items.product"
+          },
+          {
+            $group: {
+              _id: "$_id",
+              driver: { $first: "$driver" },
+              outlet: { $first: "$outlet" },
+              items: {
+                $push: {
+                  name: "$items.product.name",
+                  quantity: "$items.quantity",
+                  unit: "$items.product.unit",
+                  category: "$items.product.category",
+                  checkedByDriver: "$items.checkedByDriver",
+                  driverCheckTime: "$items.driverCheckTime",
+                  checkedByOutlet: "$items.checkedByOutlet",
+                  outletCheckTime: "$items.outletCheckTime"
+                }
+              },
+              createdAt: { $first: "$createdAt" },
+              updatedAt: { $first: "$updatedAt" }
+            }
+          },
+          {
+            $project: {
+              "driver.password": 0,
+              "driver.refresh_token": 0,
+              "outlet.password": 0,
+              "outlet.refresh_token": 0
+            }
+          }
+        ]
+      ).toArray();
 
-      if (!order) {
+      if (order.length === 0) {
         throw { name: 'NotFound', message: 'Order not found!' }
       }
 
-      return order;
+      return order[0];
     } catch (error) {
       throw error;
     }
@@ -62,7 +181,7 @@ class OrderModel {
       // "requested" | "approved" | "in_transit" | "delivered" | "completed"
       const order = await this.collection().findOneAndUpdate(
         { _id: new ObjectId(id) },
-        { $set: { status } },
+        { $set: { status, updatedAt: new Date() } },
         { returnDocument: 'after' }
       )
 
@@ -85,7 +204,7 @@ class OrderModel {
 
       const order = await this.collection().findOneAndUpdate(
         { _id: new ObjectId(id) },
-        { $set: { driverId: new ObjectId(driverId) } },
+        { $set: { driverId: new ObjectId(driverId), updatedAt: new Date() } },
         { returnDocument: 'after' }
       )
 
