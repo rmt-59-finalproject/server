@@ -2,18 +2,17 @@ require("dotenv").config();
 const { ObjectId } = require("mongodb");
 const db = require("../config/mongodb");
 
-async function seedData() {
+(async function seedData() {
   try {
-    const collection = db.collection("products");
+    const collection = db.collection("users");
+
     await collection.deleteMany({});
 
-    const data = require("../data/products.json");
+    const data = require("../data/users.json");
 
     const convertedData = data.map((item) => ({
       ...item,
       _id: new ObjectId(item._id),
-      createdAt: new Date(item.createdAt),
-      updatedAt: new Date(item.updatedAt),
     }));
 
     const result = await collection.insertMany(convertedData);
@@ -23,6 +22,4 @@ async function seedData() {
   } finally {
     process.exit(0)
   }
-}
-
-seedData();
+})();

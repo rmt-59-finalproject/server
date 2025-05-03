@@ -1,578 +1,586 @@
 [
   {
-    "_id": "e239037e00c54ab9907207fb",
-    "outletId": "dc2991a17e7742aab1bdac1f",
-    "driverId": "20acde5726aa48bbadb12721",
-    "status": "approved",
+    "_id": "681530c8a4ec45eeaa7eff95",
+    "outletId": "68136e13e9e1724a0444d9fd",
+    "driverId": "68136e13e9e1724a0444d9fa",
+    "status": "delivered",
     "items": [
       {
-        "productId": "78b965e76ef842a9968fb281",
-        "quantity": 11,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-10T00:53:53.038670Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "339ef1e9a89e45c6b108d460",
-        "quantity": 14,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-11T08:53:53.038670Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "78b965e76ef842a9968fb281",
-        "quantity": 6,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-10T07:53:53.038670Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-16T05:53:53.038670Z"
-      },
-      {
-        "productId": "78b965e76ef842a9968fb281",
-        "quantity": 19,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      }
-    ],
-    "createdAt": "2025-04-09T08:53:53.038670Z",
-    "updatedAt": "2025-04-14T08:53:53.038670Z"
-  },
-  {
-    "_id": "af676288e32045c58510b7ab",
-    "outletId": "dc2991a17e7742aab1bdac1f",
-    "driverId": "09b3a64e824044919a9fea29",
-    "status": "approved",
-    "items": [
-      {
-        "productId": "8b9c871d004a4714a4342542",
+        "productId": "68152fc8a4ec45eeaa7eff75",
         "quantity": 5,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": false,
-        "outletCheckTime": null
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T08:30:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-02T10:15:00.000Z"
       },
       {
-        "productId": "9716f0a29d144418a424a19c",
+        "productId": "68152fc8a4ec45eeaa7eff76",
+        "quantity": 3,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T08:31:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-02T10:16:00.000Z"
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff77",
         "quantity": 10,
         "checkedByDriver": true,
-        "driverCheckTime": "2025-04-20T14:53:53.038835Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
+        "driverCheckTime": "2025-05-02T08:32:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-02T10:17:00.000Z"
       }
     ],
-    "createdAt": "2025-04-19T08:53:53.038835Z",
-    "updatedAt": "2025-04-21T08:53:53.038835Z"
+    "createdAt": "2025-05-02T07:00:00.000Z",
+    "updatedAt": "2025-05-02T10:17:00.000Z"
   },
   {
-    "_id": "a5adee94f36d495e94d46bfd",
-    "outletId": "fba75ce08523486893a61e12",
-    "driverId": "61f4c9dfb7c049f396c567cf",
-    "status": "requested",
-    "items": [
-      {
-        "productId": "78b965e76ef842a9968fb281",
-        "quantity": 16,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "607c8c3708c24ff8abc9355c",
-        "quantity": 11,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-05-05T17:53:53.038906Z"
-      },
-      {
-        "productId": "339ef1e9a89e45c6b108d460",
-        "quantity": 7,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-05-04T12:53:53.038906Z"
-      },
-      {
-        "productId": "8b9c871d004a4714a4342542",
-        "quantity": 15,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-05-05T03:53:53.038906Z"
-      }
-    ],
-    "createdAt": "2025-04-30T08:53:53.038906Z",
-    "updatedAt": "2025-05-04T08:53:53.038906Z"
-  },
-  {
-    "_id": "d3e6094d024e454bbfb118cf",
-    "outletId": "faa78b84a0b24e35b59036bb",
-    "driverId": "09b3a64e824044919a9fea29",
-    "status": "in_transit",
-    "items": [
-      {
-        "productId": "8b9c871d004a4714a4342542",
-        "quantity": 6,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-22T02:53:53.038981Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-20T21:53:53.038981Z"
-      },
-      {
-        "productId": "607c8c3708c24ff8abc9355c",
-        "quantity": 2,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-21T14:53:53.038981Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-21T18:53:53.038981Z"
-      }
-    ],
-    "createdAt": "2025-04-20T08:53:53.038981Z",
-    "updatedAt": "2025-04-20T08:53:53.038981Z"
-  },
-  {
-    "_id": "734706b2469b4fae80acdbd1",
-    "outletId": "dc2991a17e7742aab1bdac1f",
-    "driverId": "61f4c9dfb7c049f396c567cf",
-    "status": "delivered",
-    "items": [
-      {
-        "productId": "0e18df078b0b4b1bb68b8b63",
-        "quantity": 18,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-11T11:53:53.039029Z"
-      }
-    ],
-    "createdAt": "2025-04-07T08:53:53.039029Z",
-    "updatedAt": "2025-04-10T08:53:53.039029Z"
-  },
-  {
-    "_id": "f60e7afdeeb549e689d77841",
-    "outletId": "05e5f3a2572d4b738d11d701",
-    "driverId": "61f4c9dfb7c049f396c567cf",
-    "status": "approved",
-    "items": [
-      {
-        "productId": "339ef1e9a89e45c6b108d460",
-        "quantity": 1,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-08T07:53:53.039069Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-12T02:53:53.039069Z"
-      },
-      {
-        "productId": "78b965e76ef842a9968fb281",
-        "quantity": 8,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-07T17:53:53.039069Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "0dcca7ff8ce248ca8adb9038",
-        "quantity": 5,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-13T06:53:53.039069Z"
-      },
-      {
-        "productId": "8b9c871d004a4714a4342542",
-        "quantity": 12,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-07T07:53:53.039069Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-13T00:53:53.039069Z"
-      }
-    ],
-    "createdAt": "2025-04-06T08:53:53.039069Z",
-    "updatedAt": "2025-04-11T08:53:53.039069Z"
-  },
-  {
-    "_id": "d6028960a5f94a8b88cf3d50",
-    "outletId": "dc2991a17e7742aab1bdac1f",
-    "driverId": "20acde5726aa48bbadb12721",
-    "status": "delivered",
-    "items": [
-      {
-        "productId": "8b9c871d004a4714a4342542",
-        "quantity": 8,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-25T04:53:53.039147Z"
-      }
-    ],
-    "createdAt": "2025-04-20T08:53:53.039147Z",
-    "updatedAt": "2025-04-23T08:53:53.039147Z"
-  },
-  {
-    "_id": "516dbbfae84b489aa58041f8",
-    "outletId": "05e5f3a2572d4b738d11d701",
-    "driverId": "fbf65400489a4c03b852b53f",
+    "_id": "681530c8a4ec45eeaa7eff96",
+    "outletId": "68136e13e9e1724a0444d9fe",
+    "driverId": "68136e13e9e1724a0444d9fb",
     "status": "completed",
     "items": [
       {
-        "productId": "9716f0a29d144418a424a19c",
-        "quantity": 5,
+        "productId": "68152fc8a4ec45eeaa7eff79",
+        "quantity": 15,
         "checkedByDriver": true,
-        "driverCheckTime": "2025-04-19T03:53:53.039177Z",
+        "driverCheckTime": "2025-05-02T09:15:00.000Z",
         "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-19T11:53:53.039177Z"
-      }
-    ],
-    "createdAt": "2025-04-17T08:53:53.039177Z",
-    "updatedAt": "2025-04-19T08:53:53.039177Z"
-  },
-  {
-    "_id": "766b1076b8e24e929791028f",
-    "outletId": "faa78b84a0b24e35b59036bb",
-    "driverId": "fbf65400489a4c03b852b53f",
-    "status": "in_transit",
-    "items": [
-      {
-        "productId": "208a418eac764d59b49aab51",
-        "quantity": 16,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-10T20:53:53.039208Z"
+        "outletCheckTime": "2025-05-02T11:20:00.000Z"
       },
       {
-        "productId": "0e18df078b0b4b1bb68b8b63",
-        "quantity": 16,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
+        "productId": "68152fc8a4ec45eeaa7eff7d",
+        "quantity": 24,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T09:16:00.000Z",
         "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-11T08:53:53.039208Z"
+        "outletCheckTime": "2025-05-02T11:21:00.000Z"
       }
     ],
-    "createdAt": "2025-04-08T08:53:53.039208Z",
-    "updatedAt": "2025-04-09T08:53:53.039208Z"
+    "createdAt": "2025-05-02T08:00:00.000Z",
+    "updatedAt": "2025-05-02T11:21:00.000Z"
   },
   {
-    "_id": "ff2ee14912a746fa9ecc1e9e",
-    "outletId": "dc2991a17e7742aab1bdac1f",
-    "driverId": "61f4c9dfb7c049f396c567cf",
+    "_id": "681530c8a4ec45eeaa7eff97",
+    "outletId": "68136e13e9e1724a0444d9ff",
+    "driverId": "68136e13e9e1724a0444d9fc",
     "status": "in_transit",
     "items": [
       {
-        "productId": "607c8c3708c24ff8abc9355c",
-        "quantity": 4,
+        "productId": "68152fc8a4ec45eeaa7eff7b",
+        "quantity": 30,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T14:00:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff8a",
+        "quantity": 20,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T14:01:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff8b",
+        "quantity": 15,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T14:02:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-02T12:30:00.000Z",
+    "updatedAt": "2025-05-02T14:02:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7eff98",
+    "outletId": "68136e13e9e1724a0444d9fd",
+    "driverId": "68136e13e9e1724a0444d9fa",
+    "status": "approved",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff84",
+        "quantity": 10,
         "checkedByDriver": false,
         "driverCheckTime": null,
         "checkedByOutlet": false,
         "outletCheckTime": null
       },
       {
-        "productId": "607c8c3708c24ff8abc9355c",
+        "productId": "68152fc8a4ec45eeaa7eff85",
+        "quantity": 5,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-02T15:00:00.000Z",
+    "updatedAt": "2025-05-02T15:30:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7eff99",
+    "outletId": "68136e13e9e1724a0444d9fe",
+    "driverId": "68136e13e9e1724a0444d9fb",
+    "status": "requested",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff78",
+        "quantity": 8,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff7c",
+        "quantity": 12,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff80",
+        "quantity": 5,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff89",
         "quantity": 3,
         "checkedByDriver": false,
         "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-26T14:53:53.039246Z"
-      },
-      {
-        "productId": "208a418eac764d59b49aab51",
-        "quantity": 16,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-23T03:53:53.039246Z",
         "checkedByOutlet": false,
         "outletCheckTime": null
       }
     ],
-    "createdAt": "2025-04-21T08:53:53.039246Z",
-    "updatedAt": "2025-04-26T08:53:53.039246Z"
+    "createdAt": "2025-05-02T16:00:00.000Z",
+    "updatedAt": "2025-05-02T16:00:00.000Z"
   },
   {
-    "_id": "fe38f93503d9491dabc9539a",
-    "outletId": "dc2991a17e7742aab1bdac1f",
-    "driverId": "61f4c9dfb7c049f396c567cf",
-    "status": "requested",
+    "_id": "681530c8a4ec45eeaa7eff9a",
+    "outletId": "68136e13e9e1724a0444d9ff",
+    "driverId": "68136e13e9e1724a0444d9fc",
+    "status": "completed",
     "items": [
       {
-        "productId": "339ef1e9a89e45c6b108d460",
-        "quantity": 13,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-24T13:53:53.039297Z"
-      }
-    ],
-    "createdAt": "2025-04-20T08:53:53.039297Z",
-    "updatedAt": "2025-04-23T08:53:53.039297Z"
-  },
-  {
-    "_id": "308321fbb9214d38889cc02b",
-    "outletId": "dc2991a17e7742aab1bdac1f",
-    "driverId": "e9ac7003113f4b55aca83be5",
-    "status": "in_transit",
-    "items": [
-      {
-        "productId": "78b965e76ef842a9968fb281",
-        "quantity": 12,
+        "productId": "68152fc8a4ec45eeaa7eff81",
+        "quantity": 7,
         "checkedByDriver": true,
-        "driverCheckTime": "2025-05-01T14:53:53.039325Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
+        "driverCheckTime": "2025-05-01T10:30:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-01T13:45:00.000Z"
       },
       {
-        "productId": "208a418eac764d59b49aab51",
-        "quantity": 15,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": false,
-        "outletCheckTime": null
+        "productId": "68152fc8a4ec45eeaa7eff82",
+        "quantity": 6,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-01T10:31:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-01T13:46:00.000Z"
       },
       {
-        "productId": "208a418eac764d59b49aab51",
-        "quantity": 8,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-05-07T14:53:53.039325Z"
-      },
-      {
-        "productId": "208a418eac764d59b49aab51",
-        "quantity": 1,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-05-01T17:53:53.039325Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "433e5f22409443a6999c8a16",
-        "quantity": 15,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-05-02T08:53:53.039325Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-05-07T00:53:53.039325Z"
-      }
-    ],
-    "createdAt": "2025-05-01T08:53:53.039325Z",
-    "updatedAt": "2025-05-06T08:53:53.039325Z"
-  },
-  {
-    "_id": "11188b9ddf234596a61f19d3",
-    "outletId": "fba75ce08523486893a61e12",
-    "driverId": "e9ac7003113f4b55aca83be5",
-    "status": "delivered",
-    "items": [
-      {
-        "productId": "0e18df078b0b4b1bb68b8b63",
-        "quantity": 9,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-10T13:53:53.039390Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-15T16:53:53.039390Z"
-      }
-    ],
-    "createdAt": "2025-04-10T08:53:53.039390Z",
-    "updatedAt": "2025-04-15T08:53:53.039390Z"
-  },
-  {
-    "_id": "1e18c034917a4dcbbe77b6f6",
-    "outletId": "ee2eb192d69944598f491e7d",
-    "driverId": "fbf65400489a4c03b852b53f",
-    "status": "delivered",
-    "items": [
-      {
-        "productId": "339ef1e9a89e45c6b108d460",
-        "quantity": 5,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-21T21:53:53.039413Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-27T10:53:53.039413Z"
-      },
-      {
-        "productId": "9716f0a29d144418a424a19c",
+        "productId": "68152fc8a4ec45eeaa7eff86",
         "quantity": 10,
         "checkedByDriver": true,
-        "driverCheckTime": "2025-04-23T02:53:53.039413Z",
+        "driverCheckTime": "2025-05-01T10:32:00.000Z",
         "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-26T19:53:53.039413Z"
-      },
-      {
-        "productId": "9716f0a29d144418a424a19c",
-        "quantity": 11,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "85eb691549f740b2b60530f0",
-        "quantity": 6,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": false,
-        "outletCheckTime": null
+        "outletCheckTime": "2025-05-01T13:47:00.000Z"
       }
     ],
-    "createdAt": "2025-04-21T08:53:53.039413Z",
-    "updatedAt": "2025-04-26T08:53:53.039413Z"
+    "createdAt": "2025-05-01T09:00:00.000Z",
+    "updatedAt": "2025-05-01T13:47:00.000Z"
   },
   {
-    "_id": "c510be14681143a2bbcb6cc1",
-    "outletId": "dc2991a17e7742aab1bdac1f",
-    "driverId": "20acde5726aa48bbadb12721",
-    "status": "completed",
-    "items": [
-      {
-        "productId": "8b9c871d004a4714a4342542",
-        "quantity": 15,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "607c8c3708c24ff8abc9355c",
-        "quantity": 2,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-13T23:53:53.039457Z"
-      },
-      {
-        "productId": "8b9c871d004a4714a4342542",
-        "quantity": 19,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-13T07:53:53.039457Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      }
-    ],
-    "createdAt": "2025-04-12T08:53:53.039457Z",
-    "updatedAt": "2025-04-12T08:53:53.039457Z"
-  },
-  {
-    "_id": "8e34b78a05ef481a8676380d",
-    "outletId": "05e5f3a2572d4b738d11d701",
-    "driverId": "fbf65400489a4c03b852b53f",
-    "status": "in_transit",
-    "items": [
-      {
-        "productId": "85eb691549f740b2b60530f0",
-        "quantity": 17,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "8b9c871d004a4714a4342542",
-        "quantity": 8,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-26T04:53:53.039492Z",
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-28T11:53:53.039492Z"
-      },
-      {
-        "productId": "9716f0a29d144418a424a19c",
-        "quantity": 5,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-26T13:53:53.039492Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      },
-      {
-        "productId": "8b9c871d004a4714a4342542",
-        "quantity": 16,
-        "checkedByDriver": true,
-        "driverCheckTime": "2025-04-26T20:53:53.039492Z",
-        "checkedByOutlet": false,
-        "outletCheckTime": null
-      }
-    ],
-    "createdAt": "2025-04-25T08:53:53.039492Z",
-    "updatedAt": "2025-04-27T08:53:53.039492Z"
-  },
-  {
-    "_id": "28694d9129794564a732912f",
-    "outletId": "fba75ce08523486893a61e12",
-    "driverId": "20acde5726aa48bbadb12721",
+    "_id": "681530c8a4ec45eeaa7eff9b",
+    "outletId": "68136e13e9e1724a0444d9fd",
+    "driverId": "68136e13e9e1724a0444d9fa",
     "status": "delivered",
     "items": [
       {
-        "productId": "78b965e76ef842a9968fb281",
-        "quantity": 19,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
+        "productId": "68152fc8a4ec45eeaa7eff7f",
+        "quantity": 12,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T11:45:00.000Z",
         "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-20T09:53:53.039537Z"
+        "outletCheckTime": "2025-05-02T14:30:00.000Z"
       },
       {
-        "productId": "208a418eac764d59b49aab51",
+        "productId": "68152fc8a4ec45eeaa7eff91",
+        "quantity": 8,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T11:46:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-02T14:31:00.000Z"
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff92",
         "quantity": 15,
         "checkedByDriver": true,
-        "driverCheckTime": "2025-04-21T00:53:53.039537Z",
+        "driverCheckTime": "2025-05-02T11:47:00.000Z",
         "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-20T17:53:53.039537Z"
+        "outletCheckTime": "2025-05-02T14:32:00.000Z"
       }
     ],
-    "createdAt": "2025-04-19T08:53:53.039537Z",
-    "updatedAt": "2025-04-19T08:53:53.039537Z"
+    "createdAt": "2025-05-02T10:00:00.000Z",
+    "updatedAt": "2025-05-02T14:32:00.000Z"
   },
   {
-    "_id": "008a1ed72a4c4f4c987e1d69",
-    "outletId": "ee2eb192d69944598f491e7d",
-    "driverId": "61f4c9dfb7c049f396c567cf",
-    "status": "requested",
+    "_id": "681530c8a4ec45eeaa7eff9c",
+    "outletId": "68136e13e9e1724a0444d9fe",
+    "driverId": "68136e13e9e1724a0444d9fb",
+    "status": "in_transit",
     "items": [
       {
-        "productId": "208a418eac764d59b49aab51",
-        "quantity": 19,
-        "checkedByDriver": false,
-        "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-27T23:53:53.039584Z"
-      }
-    ],
-    "createdAt": "2025-04-25T08:53:53.039584Z",
-    "updatedAt": "2025-04-27T08:53:53.039584Z"
-  },
-  {
-    "_id": "a60b4d5679284b66858526c3",
-    "outletId": "fba75ce08523486893a61e12",
-    "driverId": "09b3a64e824044919a9fea29",
-    "status": "requested",
-    "items": [
-      {
-        "productId": "78b965e76ef842a9968fb281",
-        "quantity": 4,
+        "productId": "68152fc8a4ec45eeaa7eff7e",
+        "quantity": 9,
         "checkedByDriver": true,
-        "driverCheckTime": "2025-04-14T08:53:53.039617Z",
+        "driverCheckTime": "2025-05-03T08:15:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff8d",
+        "quantity": 11,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-03T08:16:00.000Z",
         "checkedByOutlet": false,
         "outletCheckTime": null
       }
     ],
-    "createdAt": "2025-04-13T08:53:53.039617Z",
-    "updatedAt": "2025-04-13T08:53:53.039617Z"
+    "createdAt": "2025-05-03T07:00:00.000Z",
+    "updatedAt": "2025-05-03T08:16:00.000Z"
   },
   {
-    "_id": "cc16932012764fd5b510b2a8",
-    "outletId": "05e5f3a2572d4b738d11d701",
-    "driverId": "20acde5726aa48bbadb12721",
+    "_id": "681530c8a4ec45eeaa7eff9d",
+    "outletId": "68136e13e9e1724a0444d9ff",
+    "driverId": "68136e13e9e1724a0444d9fc",
+    "status": "approved",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff87",
+        "quantity": 5,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-03T09:00:00.000Z",
+    "updatedAt": "2025-05-03T09:15:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7eff9e",
+    "outletId": "68136e13e9e1724a0444d9fd",
+    "driverId": "68136e13e9e1724a0444d9fa",
+    "status": "requested",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff83",
+        "quantity": 7,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff8e",
+        "quantity": 10,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-03T10:00:00.000Z",
+    "updatedAt": "2025-05-03T10:00:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7eff9f",
+    "outletId": "68136e13e9e1724a0444d9fe",
+    "driverId": "68136e13e9e1724a0444d9fb",
     "status": "completed",
     "items": [
       {
-        "productId": "433e5f22409443a6999c8a16",
+        "productId": "68152fc8a4ec45eeaa7eff88",
+        "quantity": 6,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-01T15:30:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-01T17:45:00.000Z"
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff93",
+        "quantity": 4,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-01T15:31:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-01T17:46:00.000Z"
+      }
+    ],
+    "createdAt": "2025-05-01T14:00:00.000Z",
+    "updatedAt": "2025-05-01T17:46:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa0",
+    "outletId": "68136e13e9e1724a0444d9ff",
+    "driverId": "68136e13e9e1724a0444d9fc",
+    "status": "delivered",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff8f",
+        "quantity": 3,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T14:45:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-02T16:30:00.000Z"
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff89",
         "quantity": 2,
         "checkedByDriver": true,
-        "driverCheckTime": "2025-04-03T04:53:53.039660Z",
+        "driverCheckTime": "2025-05-02T14:46:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-02T16:31:00.000Z"
+      }
+    ],
+    "createdAt": "2025-05-02T13:00:00.000Z",
+    "updatedAt": "2025-05-02T16:31:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa1",
+    "outletId": "68136e13e9e1724a0444d9fd",
+    "driverId": "68136e13e9e1724a0444d9fa",
+    "status": "in_transit",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff90",
+        "quantity": 8,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-03T13:15:00.000Z",
         "checkedByOutlet": false,
         "outletCheckTime": null
       },
       {
-        "productId": "0e18df078b0b4b1bb68b8b63",
+        "productId": "68152fc8a4ec45eeaa7eff8c",
+        "quantity": 5,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-03T13:16:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-03T12:00:00.000Z",
+    "updatedAt": "2025-05-03T13:16:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa2",
+    "outletId": "68136e13e9e1724a0444d9fe",
+    "driverId": "68136e13e9e1724a0444d9fb",
+    "status": "approved",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff7a",
+        "quantity": 15,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff7b",
+        "quantity": 20,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-03T14:00:00.000Z",
+    "updatedAt": "2025-05-03T14:15:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa3",
+    "outletId": "68136e13e9e1724a0444d9ff",
+    "driverId": "68136e13e9e1724a0444d9fc",
+    "status": "requested",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff75",
+        "quantity": 3,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff76",
+        "quantity": 4,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff77",
+        "quantity": 5,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-03T15:00:00.000Z",
+    "updatedAt": "2025-05-03T15:00:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa4",
+    "outletId": "68136e13e9e1724a0444d9fd",
+    "driverId": "68136e13e9e1724a0444d9fa",
+    "status": "completed",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff79",
+        "quantity": 10,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-01T16:30:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-01T18:45:00.000Z"
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff7d",
+        "quantity": 15,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-01T16:31:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-01T18:46:00.000Z"
+      }
+    ],
+    "createdAt": "2025-05-01T15:00:00.000Z",
+    "updatedAt": "2025-05-01T18:46:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa5",
+    "outletId": "68136e13e9e1724a0444d9fe",
+    "driverId": "68136e13e9e1724a0444d9fb",
+    "status": "delivered",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff84",
+        "quantity": 7,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T17:45:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-02T19:30:00.000Z"
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff85",
+        "quantity": 4,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-02T17:46:00.000Z",
+        "checkedByOutlet": true,
+        "outletCheckTime": "2025-05-02T19:31:00.000Z"
+      }
+    ],
+    "createdAt": "2025-05-02T16:00:00.000Z",
+    "updatedAt": "2025-05-02T19:31:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa6",
+    "outletId": "68136e13e9e1724a0444d9ff",
+    "driverId": "68136e13e9e1724a0444d9fc",
+    "status": "in_transit",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff78",
+        "quantity": 6,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-03T16:15:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff7c",
+        "quantity": 8,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-03T16:16:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff80",
+        "quantity": 4,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-03T16:17:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff89",
+        "quantity": 2,
+        "checkedByDriver": true,
+        "driverCheckTime": "2025-05-03T16:18:00.000Z",
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-03T15:00:00.000Z",
+    "updatedAt": "2025-05-03T16:18:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa7",
+    "outletId": "68136e13e9e1724a0444d9fd",
+    "driverId": "68136e13e9e1724a0444d9fa",
+    "status": "approved",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff81",
+        "quantity": 9,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff82",
+        "quantity": 8,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff86",
+        "quantity": 12,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      }
+    ],
+    "createdAt": "2025-05-03T17:00:00.000Z",
+    "updatedAt": "2025-05-03T17:15:00.000Z"
+  },
+  {
+    "_id": "681530c8a4ec45eeaa7effa8",
+    "outletId": "68136e13e9e1724a0444d9fe",
+    "driverId": "68136e13e9e1724a0444d9fb",
+    "status": "requested",
+    "items": [
+      {
+        "productId": "68152fc8a4ec45eeaa7eff7f",
+        "quantity": 7,
+        "checkedByDriver": false,
+        "driverCheckTime": null,
+        "checkedByOutlet": false,
+        "outletCheckTime": null
+      },
+      {
+        "productId": "68152fc8a4ec45eeaa7eff91",
         "quantity": 6,
         "checkedByDriver": false,
         "driverCheckTime": null,
@@ -580,15 +588,15 @@
         "outletCheckTime": null
       },
       {
-        "productId": "433e5f22409443a6999c8a16",
-        "quantity": 19,
+        "productId": "68152fc8a4ec45eeaa7eff92",
+        "quantity": 9,
         "checkedByDriver": false,
         "driverCheckTime": null,
-        "checkedByOutlet": true,
-        "outletCheckTime": "2025-04-07T13:53:53.039660Z"
+        "checkedByOutlet": false,
+        "outletCheckTime": null
       }
     ],
-    "createdAt": "2025-04-02T08:53:53.039660Z",
-    "updatedAt": "2025-04-07T08:53:53.039660Z"
+    "createdAt": "2025-05-03T18:00:00.000Z",
+    "updatedAt": "2025-05-03T18:00:00.000Z"
   }
 ]

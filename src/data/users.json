@@ -1,0 +1,44 @@
+[
+  {
+    "_id": "68136e13e9e1724a0444d9fa",
+    "username": "moses",
+    "name": "Moses Simanungkalit",
+    "password": "batagor",
+    "role": "driver"
+  },
+  {
+    "_id": "68136e13e9e1724a0444d9fb",
+    "username": "hafizh",
+    "name": "Abdul Hafizh Mahfudin",
+    "password": "batagor",
+    "role": "driver"
+  },
+  {
+    "_id": "68136e13e9e1724a0444d9fc",
+    "username": "zen",
+    "name": "Muh. Zaenal Abidin",
+    "password": "batagor",
+    "role": "driver"
+  },
+  {
+    "_id": "68136e13e9e1724a0444d9fd",
+    "username": "hektip-rmt",
+    "name": "Gerai Hektip RMT",
+    "password": "batagor",
+    "role": "outlet"
+  },
+  {
+    "_id": "68136e13e9e1724a0444d9fe",
+    "username": "hektip-hck",
+    "name": "Gerai Hektip HCK",
+    "password": "batagor",
+    "role": "outlet"
+  },
+  {
+    "_id": "68136e13e9e1724a0444d9ff",
+    "username": "hektip-bsd",
+    "name": "Gerai Hektip BSD",
+    "password": "batagor",
+    "role": "outlet"
+  }
+]
