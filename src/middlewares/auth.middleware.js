@@ -55,7 +55,33 @@ async function authWarehouse(req, res, next) {
   }
 }
 
+async function authOutlet(req, res, next) {
+  try {
+    if (req.user.role !== 'outlet' && req.user.role !== 'warehouse') {
+      throw { name: 'Forbidden', message: 'You are not authorized to access this resource.' };
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function authDriver(req, res, next) {
+  try {
+    if (req.user.role !== 'driver' || req.user.role !== 'warehouse') {
+      throw { name: 'Forbidden', message: 'You are not authorized to access this resource.' };
+    }
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   authentication,
-  authWarehouse
+  authWarehouse,
+  authDriver,
+  authOutlet
 }
