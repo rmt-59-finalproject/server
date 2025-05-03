@@ -9,5 +9,6 @@ router.get("/", (req, res) => {
 
 router.use(require('./user.routes'));
 router.use(require("./inventory.routes"));
+router.use('/orders', require('./order.routes'));
 
 module.exports = router;
