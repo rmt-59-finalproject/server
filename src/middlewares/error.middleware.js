@@ -16,6 +16,10 @@ function errorMiddleware(error, req, res, next) {
   if (error.name === 'BadRequest') {
     return res.status(400).json({ message: error.message })
   }
+  
+  if (error.name === 'BSONError') {
+    return res.status(400).json({ message: "Invalid ID." })
+  }
 
   if (error.name === 'Unauthorized') {
     return res.status(401).json({ message: error.message })
