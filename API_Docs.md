@@ -16,16 +16,25 @@ List of available endpoints.
   - [3. GET /api/login](#3-get-apilogin)
   - [4. GET /api/logout](#4-get-apilogout)
   - [5. GET /api/users](#5-get-apiusers)
+- [Inventory](#inventory)
+  - [6. GET /api/inventory](#6-get-apiinventory)
+  - [7. POST /api/inventory](#7-post-apiinventory)
+  - [8. PATCH /api/inventory/:id](#8-patch-apiinventoryid)
+  - [9. DELETE /api/inventory/:id](#9-delete-apiinventoryid)
 - [Orders](#orders)
-  - [6. GET /api/orders](#6-get-apiorders)
-  - [7. GET /api/orders/:id](#7-get-apiordersid)
-  - [8. POST /api/orders](#8-post-apiorders)
-  - [9. PATCH /api/orders/:id](#9-patch-apiordersid)
-  - [10. PATCH /api/orders/:id/driver](#10-patch-apiordersiddriver)
+  - [10. GET /api/orders](#10-get-apiorders)
+  - [11. GET /api/orders/:id](11-get-apiordersid)
+  - [12. POST /api/orders](#12-post-apiorders)
+  - [13. PATCH /api/orders/:id](#13-patch-apiordersid)
+  - [14. PATCH /api/orders/:id/driver](#14-patch-apiordersiddriver)
 - [Driver](#driver)
-  - [11. GET /api/driver/orders](#11-get-apidriverorders)
-  - [12. GET /api/driver/orders/:id](#12-get-apidriverordersid)
-  - [13. PATCH /api/driver/orders/:id](#13-patch-apidriverordersid)
+  - [15. GET /api/driver/orders](#15-get-apidriverorders)
+  - [16. GET /api/driver/orders/:id](#16-get-apidriverordersid)
+  - [17. PATCH /api/driver/orders/:id](#17-patch-apidriverordersid)
+- [Outlet](#outlet)
+  - [18. GET /api/outlet/orders](#18-get-apioutletorders)
+  - [19. GET /api/outlet/orders/:id](#19-get-apioutletordersid)
+  - [20. PATCH /api/outlet/orders/:id](#20-patch-apioutletordersid)
 - [Errors](#errors)
   - [Global Error](#global-error)
 
@@ -261,11 +270,206 @@ _Response (200 - OK)_
 ]
 ```
 
+# Inventory
+
+Endpoint to interact with inventory.
+
+## 6. GET /api/inventory
+
+Description:
+
+> Read inventory data
+
+Request:
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+- params:
+
+```json
+{
+  "search": "string",
+  "limit (optional)": "number",
+  "page (optional)": "number"
+}
+```
+
+_Response (200 - OK)_
+  
+```json
+{
+  "totalItems": "number",
+  "data": [
+    {
+      "_id": "string",
+      "name": "string",
+      "stock": "number",
+      "unit": "string",
+      "category": "string",
+      "createdAt": "date",
+      "updatedAt": "date"
+    },
+    ...
+  ]
+}
+```
+
+## 7. POST /api/inventory
+
+Description:
+
+> Create new inventory item
+
+Request:
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+- body:
+
+```json
+{
+  "name": "string (required)",
+  "stock": "number (required)",
+  "unit": "string (required)",
+  "category": "string (required)"
+}
+```
+
+_Response (201 - Created)_
+
+```json
+{
+  "_id": "string",
+  "name": "string",
+  "stock": "number",
+  "unit": "string",
+  "category": "string",
+  "createdAt": "date",
+  "updatedAt": "date"
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "message": "Name is required" || "Stock is required" || "Unit is required" || "Category is required"
+}
+```
+
+_Response (409 - Conflict)_
+
+```json
+{
+  "message": "This product already exists"
+}
+```
+
+## 8. PATCH /api/inventory/:id
+
+Description:
+
+> Update inventory stock
+
+Request:
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "string (required)"
+}
+```
+
+- body:
+
+```json
+{
+  "stock": "number (required)"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "<name> updated successfully"
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Product not found"
+}
+```
+
+## 9. DELETE /api/inventory/:id
+
+Description:
+
+> Delete inventory item by ID
+
+Request:
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "string (required)"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "<name> deleted successfully"
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Product not found"
+}
+```
+
 # Orders
 
 Endpoint to interact with orders.
 
-## 6. GET /api/orders
+## 10. GET /api/orders
 
 Description:
 
@@ -273,7 +477,7 @@ Description:
 
 Request:
 
-- params:
+- query:
 
 ```json
 {
@@ -337,7 +541,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 7. GET /api/orders/:id
+## 11. GET /api/orders/:id
 
 Description:
 
@@ -403,7 +607,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 8. POST /api/orders
+## 12. POST /api/orders
 
 Description:
 
@@ -447,7 +651,7 @@ _Response (400 - Bad Requeset)_
 }
 ```
 
-## 9. PATCH /api/orders/:id
+## 13. PATCH /api/orders/:id
 
 Description:
 
@@ -495,7 +699,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 10. PATCH /api/orders/:id/driver
+## 14. PATCH /api/orders/:id/driver
 
 Description:
 
@@ -549,7 +753,7 @@ OR
 
 # Driver
 
-## 11. GET /api/driver/orders
+## 15. GET /api/driver/orders
 
 Description:
 
@@ -557,7 +761,7 @@ Description:
 
 Request:
 
-- params:
+- query:
 
 ```json
 {
@@ -620,7 +824,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 12. GET /api/driver/orders/:id
+## 16. GET /api/driver/orders/:id
 
 Description:
 
@@ -686,7 +890,7 @@ _Response (404 - Not Found)_
 }
 ```
 
-## 13. PATCH /api/driver/orders/:id
+## 17. PATCH /api/driver/orders/:id
 
 Description:
 
@@ -724,6 +928,195 @@ _Response (200 - OK)_
 ```json
 {
   "message": "Checked <quantity> <unit> of <product name>."
+}
+```
+
+_Response (400 - Bad Request)_
+
+```json
+{
+  "message": "Product ID is required."
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Order not found!"
+}
+```
+
+# Outlet
+
+## 18. GET /api/driver/orders
+
+Description:
+
+> Read current outlet order task
+
+Request:
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+- query:
+
+```json
+{
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+[
+  {
+    "_id": "string",
+    "driver": {
+      "_id": "string",
+      "username": "string",
+      "name": "string",
+      "role": "driver"
+    },
+    "outlet": {
+      "_id": "string",
+      "username": "string",
+      "name": "string",
+      "role": "outlet"
+    },
+    "status": "string",
+    "items": [
+      {
+        "_id": "string",
+        "name": "string",
+        "quantity": "number",
+        "unit": "string",
+        "category": "string",
+        "checkedByDriver": "boolean",
+        "driverCheckTime": "date" || null,
+        "checkedByOutlet": "boolean",
+        "outletCheckTime": "date" || null
+      },
+      ...
+    ],
+    "createdAt": "date",
+    "updatedAt": "date"
+  },
+    ...
+]
+```
+
+## 19. GET /api/outlet/orders/:id
+
+Description:
+
+> Read order by ID based on outlet task
+
+Request:
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "string - order ID (required)"
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "_id": "string",
+  "driver": {
+    "_id": "string",
+    "username": "string",
+    "role": "driver"
+  },
+  "outlet": {
+    "_id": "string",
+    "username": "string",
+    "role": "outlet"
+  },
+  "status": "string",
+  "items": [
+    {
+      "_id": "string",
+      "name": "string",
+      "quantity": "number",
+      "unit": "string",
+      "category": "string",
+      "checkedByDriver": "boolean",
+      "driverCheckTime": "date" || null,
+      "checkedByOutlet": "boolean",
+      "outletCheckTime": "date" || null
+    },
+    ...
+  ],
+  "createdAt": "date",
+  "updatedAt": "date"
+}
+```
+
+_Response (404 - Not Found)_
+
+```json
+{
+  "message": "Order not found"
+}
+```
+
+## 20. PATCH /api/outlet/orders/:id
+
+Description:
+
+> Update item status in specific order based on outlet task
+
+Request:
+
+- cookies:
+
+```json
+{
+  "access_token": "Bearer <access_token>"
+}
+```
+
+- params:
+
+```json
+{
+  "id": "string - order ID (required)"
+}
+```
+
+- body:
+
+```json
+{
+  "productId": "string - productId (required)",
+}
+```
+
+_Response (200 - OK)_
+
+```json
+{
+  "message": "Outlet checked <quantity> <unit> of <product name>."
 }
 ```
 

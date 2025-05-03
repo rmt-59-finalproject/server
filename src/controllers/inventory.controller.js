@@ -28,7 +28,6 @@ class InventoryController {
   }
 
   static async createInventory(req, res, next) {
-    const { name, stock, unit, category } = req.body;
     try {
       const inventory = await ProductModel.create({
         ...req.body,
