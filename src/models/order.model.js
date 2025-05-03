@@ -56,6 +56,21 @@ class OrderModel {
       throw error;
     }
   }
+
+  static async patchOrderStatus(id, status) {
+    try {
+      // "requested" | "approved" | "in_transit" | "delivered" | "completed"
+      const order = await this.collection().findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $set: { status } },
+        { returnDocument: 'after' }
+      )
+
+      return order;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = OrderModel;
