@@ -4,7 +4,7 @@ class DriverController {
   static async readAllOrders(req, res, next) {
     try {
       const { id: driverId } = req.user;
-      const { status } = req.body;
+      const { status } = req.query || undefined;
 
       const order = await DriverModel.getAllOrders(driverId, status);
 
