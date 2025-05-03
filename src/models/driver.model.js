@@ -7,6 +7,9 @@ class DriverModel {
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1c4138f (feat: GET /orders/:id - read driver order by id)
   static async getAllOrders(driverId, status) {
     try {
       const pipeline = [
@@ -57,7 +60,10 @@ class DriverModel {
             },
             'items': {
               '$push': {
+<<<<<<< HEAD
                 '_id': '$items.product._id',
+=======
+>>>>>>> 1c4138f (feat: GET /orders/:id - read driver order by id)
                 'name': '$items.product.name',
                 'quantity': '$items.quantity',
                 'unit': '$items.product.unit',
@@ -107,23 +113,32 @@ class DriverModel {
   }
 
   static async getOrdersById(driverId, id) {
+<<<<<<< HEAD
 =======
   static async getAllOrders(id) {
 >>>>>>> c097093 (feat: GET /driver/orders - read all driver order task)
+=======
+>>>>>>> 1c4138f (feat: GET /orders/:id - read driver order by id)
     try {
       const order = await this.collection().aggregate(
         [
           {
             '$match': {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1c4138f (feat: GET /orders/:id - read driver order by id)
               'driverId': new ObjectId(driverId)
             }
           }, {
             '$match': {
               '_id': new ObjectId(id)
+<<<<<<< HEAD
 =======
               'driverId': new ObjectId(id)
 >>>>>>> c097093 (feat: GET /driver/orders - read all driver order task)
+=======
+>>>>>>> 1c4138f (feat: GET /orders/:id - read driver order by id)
             }
           }, {
             '$lookup': {
@@ -167,6 +182,9 @@ class DriverModel {
                 '$first': '$status'
               },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 1c4138f (feat: GET /orders/:id - read driver order by id)
               'createdAt': {
                 '$first': '$createdAt'
               },
@@ -190,6 +208,7 @@ class DriverModel {
                   'outletCheckTime': '$items.outletCheckTime'
                 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
               },
               'createdAt': {
@@ -198,6 +217,8 @@ class DriverModel {
               'updatedAt': {
                 '$first': '$updatedAt'
 >>>>>>> c097093 (feat: GET /driver/orders - read all driver order task)
+=======
+>>>>>>> 1c4138f (feat: GET /orders/:id - read driver order by id)
               }
             }
           }, {
@@ -215,6 +236,7 @@ class DriverModel {
         throw { name: 'NotFound', message: 'Order not found!' }
       }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
       return order[0];
     } catch (error) {
@@ -256,6 +278,9 @@ class DriverModel {
 =======
       return order;
 >>>>>>> c097093 (feat: GET /driver/orders - read all driver order task)
+=======
+      return order[0];
+>>>>>>> 1c4138f (feat: GET /orders/:id - read driver order by id)
     } catch (error) {
       throw error;
     }
