@@ -1,6 +1,4 @@
 require('dotenv').config();
-const path = require('path');
-const fs = require('fs');
 const db = require('../config/mongodb');
 const { ObjectId } = require('mongodb');
 
@@ -28,11 +26,7 @@ function parseOrder(order) {
 
 (async function seedDummyOrder() {
   try {
-    const filePath = path.join(__dirname, '../data/dummy_orders.json');
-    const rawData = fs.readFileSync(filePath, 'utf-8');
-    const data = JSON.parse(rawData);
-
-    if (!Array.isArray(data)) throw new Error('Invalid JSON format');
+    const data = require('../data/dummy_orders.json')
 
     await db.collection('orders').deleteMany({});
     const parsedOrders = data.map(order => parseOrder(order));

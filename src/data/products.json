@@ -1,250 +1,281 @@
 [
   {
+    "_id": "68152fc8a4ec45eeaa7eff75",
     "name": "Beras Premium 5kg",
     "stock": 100,
     "unit": "kg",
     "category": "Bahan Pokok",
-    "createdAt": "2025-05-01T10:00:00Z",
-    "updatedAt": "2025-05-01T10:00:00Z"
+    "createdAt": "2025-05-01T10:00:00.000Z",
+    "updatedAt": "2025-05-01T10:00:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff76",
     "name": "Minyak Goreng 2L",
     "stock": 150,
     "unit": "liter",
     "category": "Bahan Pokok",
-    "createdAt": "2025-05-01T10:01:00Z",
-    "updatedAt": "2025-05-01T10:01:00Z"
+    "createdAt": "2025-05-01T10:01:00.000Z",
+    "updatedAt": "2025-05-01T10:01:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff77",
     "name": "Gula Pasir 1kg",
     "stock": 200,
     "unit": "kg",
     "category": "Bahan Pokok",
-    "createdAt": "2025-05-01T10:02:00Z",
-    "updatedAt": "2025-05-01T10:02:00Z"
+    "createdAt": "2025-05-01T10:02:00.000Z",
+    "updatedAt": "2025-05-01T10:02:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff78",
     "name": "Sabun Cuci Piring",
     "stock": 120,
     "unit": "pcs",
     "category": "Alat Kebersihan",
-    "createdAt": "2025-05-01T10:03:00Z",
-    "updatedAt": "2025-05-01T10:03:00Z"
+    "createdAt": "2025-05-01T10:03:00.000Z",
+    "updatedAt": "2025-05-01T10:03:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff79",
     "name": "Susu UHT 1L",
     "stock": 180,
     "unit": "liter",
     "category": "Minuman",
-    "createdAt": "2025-05-01T10:04:00Z",
-    "updatedAt": "2025-05-01T10:04:00Z"
+    "createdAt": "2025-05-01T10:04:00.000Z",
+    "updatedAt": "2025-05-01T10:04:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff7a",
     "name": "Kopi Sachet 10pcs",
     "stock": 250,
     "unit": "box",
     "category": "Minuman",
-    "createdAt": "2025-05-01T10:05:00Z",
-    "updatedAt": "2025-05-01T10:05:00Z"
+    "createdAt": "2025-05-01T10:05:00.000Z",
+    "updatedAt": "2025-05-01T10:05:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff7b",
     "name": "Indomie Goreng",
     "stock": 300,
     "unit": "pcs",
     "category": "Makanan Instan",
-    "createdAt": "2025-05-01T10:06:00Z",
-    "updatedAt": "2025-05-01T10:06:00Z"
+    "createdAt": "2025-05-01T10:06:00.000Z",
+    "updatedAt": "2025-05-01T10:06:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff7c",
     "name": "Tisu Gulung 2 Ply",
     "stock": 400,
     "unit": "pcs",
     "category": "Alat Kebersihan",
-    "createdAt": "2025-05-01T10:07:00Z",
-    "updatedAt": "2025-05-01T10:07:00Z"
+    "createdAt": "2025-05-01T10:07:00.000Z",
+    "updatedAt": "2025-05-01T10:07:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff7d",
     "name": "Air Mineral 600ml",
     "stock": 350,
     "unit": "pcs",
     "category": "Minuman",
-    "createdAt": "2025-05-01T10:08:00Z",
-    "updatedAt": "2025-05-01T10:08:00Z"
+    "createdAt": "2025-05-01T10:08:00.000Z",
+    "updatedAt": "2025-05-01T10:08:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff7e",
     "name": "Kecap Manis 500ml",
     "stock": 100,
     "unit": "bottle",
     "category": "Bumbu Dapur",
-    "createdAt": "2025-05-01T10:09:00Z",
-    "updatedAt": "2025-05-01T10:09:00Z"
+    "createdAt": "2025-05-01T10:09:00.000Z",
+    "updatedAt": "2025-05-01T10:09:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff7f",
     "name": "Sarden Kaleng",
     "stock": 90,
     "unit": "pcs",
     "category": "Makanan Kaleng",
-    "createdAt": "2025-05-01T10:10:00Z",
-    "updatedAt": "2025-05-01T10:10:00Z"
+    "createdAt": "2025-05-01T10:10:00.000Z",
+    "updatedAt": "2025-05-01T10:10:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff80",
     "name": "Sikat WC",
     "stock": 60,
     "unit": "pcs",
     "category": "Alat Kebersihan",
-    "createdAt": "2025-05-01T10:11:00Z",
-    "updatedAt": "2025-05-01T10:11:00Z"
+    "createdAt": "2025-05-01T10:11:00.000Z",
+    "updatedAt": "2025-05-01T10:11:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff81",
     "name": "Sabun Mandi Cair 250ml",
     "stock": 130,
     "unit": "bottle",
     "category": "Toiletries",
-    "createdAt": "2025-05-01T10:12:00Z",
-    "updatedAt": "2025-05-01T10:12:00Z"
+    "createdAt": "2025-05-01T10:12:00.000Z",
+    "updatedAt": "2025-05-01T10:12:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff82",
     "name": "Shampoo 200ml",
     "stock": 110,
     "unit": "bottle",
     "category": "Toiletries",
-    "createdAt": "2025-05-01T10:13:00Z",
-    "updatedAt": "2025-05-01T10:13:00Z"
+    "createdAt": "2025-05-01T10:13:00.000Z",
+    "updatedAt": "2025-05-01T10:13:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff83",
     "name": "Teh Celup 25pcs",
     "stock": 140,
     "unit": "box",
     "category": "Minuman",
-    "createdAt": "2025-05-01T10:14:00Z",
-    "updatedAt": "2025-05-01T10:14:00Z"
+    "createdAt": "2025-05-01T10:14:00.000Z",
+    "updatedAt": "2025-05-01T10:14:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff84",
     "name": "Roti Tawar",
     "stock": 80,
     "unit": "pcs",
     "category": "Makanan",
-    "createdAt": "2025-05-01T10:15:00Z",
-    "updatedAt": "2025-05-01T10:15:00Z"
+    "createdAt": "2025-05-01T10:15:00.000Z",
+    "updatedAt": "2025-05-01T10:15:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff85",
     "name": "Keju Slice 10pcs",
     "stock": 70,
     "unit": "pack",
     "category": "Makanan",
-    "createdAt": "2025-05-01T10:16:00Z",
-    "updatedAt": "2025-05-01T10:16:00Z"
+    "createdAt": "2025-05-01T10:16:00.000Z",
+    "updatedAt": "2025-05-01T10:16:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff86",
     "name": "Pasta Gigi 100g",
     "stock": 160,
     "unit": "tube",
     "category": "Toiletries",
-    "createdAt": "2025-05-01T10:17:00Z",
-    "updatedAt": "2025-05-01T10:17:00Z"
+    "createdAt": "2025-05-01T10:17:00.000Z",
+    "updatedAt": "2025-05-01T10:17:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff87",
     "name": "Air Galon 19L",
     "stock": 55,
     "unit": "pcs",
     "category": "Minuman",
-    "createdAt": "2025-05-01T10:18:00Z",
-    "updatedAt": "2025-05-01T10:18:00Z"
+    "createdAt": "2025-05-01T10:18:00.000Z",
+    "updatedAt": "2025-05-01T10:18:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff88",
     "name": "Detergen Bubuk 1kg",
     "stock": 95,
     "unit": "kg",
     "category": "Alat Kebersihan",
-    "createdAt": "2025-05-01T10:19:00Z",
-    "updatedAt": "2025-05-01T10:19:00Z"
+    "createdAt": "2025-05-01T10:19:00.000Z",
+    "updatedAt": "2025-05-01T10:19:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff89",
     "name": "Pel Lantai",
     "stock": 50,
     "unit": "pcs",
     "category": "Alat Kebersihan",
-    "createdAt": "2025-05-01T10:20:00Z",
-    "updatedAt": "2025-05-01T10:20:00Z"
+    "createdAt": "2025-05-01T10:20:00.000Z",
+    "updatedAt": "2025-05-01T10:20:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff8a",
     "name": "Snack Kentang",
     "stock": 220,
     "unit": "pcs",
     "category": "Makanan Ringan",
-    "createdAt": "2025-05-01T10:21:00Z",
-    "updatedAt": "2025-05-01T10:21:00Z"
+    "createdAt": "2025-05-01T10:21:00.000Z",
+    "updatedAt": "2025-05-01T10:21:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff8b",
     "name": "Coklat Batangan",
     "stock": 180,
     "unit": "pcs",
     "category": "Makanan Ringan",
-    "createdAt": "2025-05-01T10:22:00Z",
-    "updatedAt": "2025-05-01T10:22:00Z"
+    "createdAt": "2025-05-01T10:22:00.000Z",
+    "updatedAt": "2025-05-01T10:22:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff8c",
     "name": "Mentega 200g",
     "stock": 90,
     "unit": "pack",
     "category": "Bahan Pokok",
-    "createdAt": "2025-05-01T10:23:00Z",
-    "updatedAt": "2025-05-01T10:23:00Z"
+    "createdAt": "2025-05-01T10:23:00.000Z",
+    "updatedAt": "2025-05-01T10:23:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff8d",
     "name": "Sambal Botol 135ml",
     "stock": 85,
     "unit": "bottle",
     "category": "Bumbu Dapur",
-    "createdAt": "2025-05-01T10:24:00Z",
-    "updatedAt": "2025-05-01T10:24:00Z"
+    "createdAt": "2025-05-01T10:24:00.000Z",
+    "updatedAt": "2025-05-01T10:24:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff8e",
     "name": "Kopi Bubuk 200g",
     "stock": 100,
     "unit": "pack",
     "category": "Minuman",
-    "createdAt": "2025-05-01T10:25:00Z",
-    "updatedAt": "2025-05-01T10:25:00Z"
+    "createdAt": "2025-05-01T10:25:00.000Z",
+    "updatedAt": "2025-05-01T10:25:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff8f",
     "name": "Sapu Ijuk",
     "stock": 40,
     "unit": "pcs",
     "category": "Alat Kebersihan",
-    "createdAt": "2025-05-01T10:26:00Z",
-    "updatedAt": "2025-05-01T10:26:00Z"
+    "createdAt": "2025-05-01T10:26:00.000Z",
+    "updatedAt": "2025-05-01T10:26:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff90",
     "name": "Tepung Terigu 1kg",
     "stock": 150,
     "unit": "kg",
     "category": "Bahan Pokok",
-    "createdAt": "2025-05-01T10:27:00Z",
-    "updatedAt": "2025-05-01T10:27:00Z"
+    "createdAt": "2025-05-01T10:27:00.000Z",
+    "updatedAt": "2025-05-01T10:27:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff91",
     "name": "Sosis Ayam 250g",
     "stock": 75,
     "unit": "pack",
     "category": "Makanan Beku",
-    "createdAt": "2025-05-01T10:28:00Z",
-    "updatedAt": "2025-05-01T10:28:00Z"
+    "createdAt": "2025-05-01T10:28:00.000Z",
+    "updatedAt": "2025-05-01T10:28:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff92",
     "name": "Es Krim Cup",
     "stock": 95,
     "unit": "pcs",
     "category": "Makanan Beku",
-    "createdAt": "2025-05-01T10:29:00Z",
-    "updatedAt": "2025-05-01T10:29:00Z"
+    "createdAt": "2025-05-01T10:29:00.000Z",
+    "updatedAt": "2025-05-01T10:29:00.000Z"
   },
   {
+    "_id": "68152fc8a4ec45eeaa7eff93",
     "name": "Sabun Cuci Baju Cair",
     "stock": 130,
     "unit": "liter",
     "category": "Alat Kebersihan",
-    "createdAt": "2025-05-01T10:30:00Z",
-    "updatedAt": "2025-05-01T10:30:00Z"
+    "createdAt": "2025-05-01T10:30:00.000Z",
+    "updatedAt": "2025-05-01T10:30:00.000Z"
   }
 ]
