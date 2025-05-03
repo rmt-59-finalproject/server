@@ -185,11 +185,11 @@ class OrderModel {
         { returnDocument: 'after' }
       )
 
-      if (!order) {
+      if (!order.value) {
         throw { name: 'NotFound', message: 'Order not found!' }
       }
 
-      return order;
+      return order.value;
     } catch (error) {
       throw error;
     }
