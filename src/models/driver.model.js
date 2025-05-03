@@ -248,6 +248,7 @@ class DriverModel {
         name: item.name,
         unit: item.unit
       };
+
     } catch (error) {
       throw error;
     }
