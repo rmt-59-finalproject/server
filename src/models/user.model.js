@@ -123,6 +123,27 @@ class UserModel {
       throw error;
     }
   }
+
+  static async getAllUsers(role) {
+    try {
+      const option = {};
+
+      if (role) {
+        option.role = role
+      }
+
+      const users = await this.collection().find(option, {
+        projection: {
+          password: 0,
+          refresh_token: 0,
+        }
+      }).toArray();
+
+      return users
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 module.exports = UserModel;
