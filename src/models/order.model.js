@@ -183,9 +183,13 @@ class OrderModel {
               'items': {
                 '$push': {
 <<<<<<< HEAD
+<<<<<<< HEAD
                   '_id': '$items.product._id',
 =======
 >>>>>>> c097093 (feat: GET /driver/orders - read all driver order task)
+=======
+                  '_id': '$items.product._id',
+>>>>>>> a82ad9a (feat: PATCH /driver/orders/:id - update item status checked or not by driver)
                   'name': '$items.product.name',
                   'quantity': '$items.quantity',
                   'unit': '$items.product.unit',
