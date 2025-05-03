@@ -115,7 +115,7 @@ class UserController {
 
   static async readAllUsers(req, res, next) {
     try {
-      const { role } = req.body || {};
+      const { role } = req.query || {};
 
       const users = await UserModel.getAllUsers(role);
 
