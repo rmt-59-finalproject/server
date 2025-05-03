@@ -7,7 +7,7 @@ const productSchema = z
       .min(1, "Name is required")
       .refine((val) => val !== null, { message: "Name is required" }),
 
-    stock: z.number().nonnegative("cannot be negative"),
+    stock: z.number().nonnegative("Stock cannot be negative"),
 
     unit: z
       .string()
