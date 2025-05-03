@@ -7,14 +7,47 @@ class ProductModel {
     return db.collection("products");
   }
 
-  static async getAll() {
+  static async getAll(search = "", page, limit) {
     try {
-      const products = await this.collection()
-        .find()
-        .sort({ updatedAt: -1 })
-        .toArray();
+      let query = {};
 
-      return products;
+      if (search.trim()) {
+        const searchWords = search.trim().split(" ");
+
+        query = {
+          $and: searchWords.map((el) => ({
+            name: {
+              $regex: el,
+              $options: "i",
+            },
+          })),
+        };
+      }
+
+      const cursor = this.collection().find(query).sort({ updatedAt: -1 });
+
+      const totalItems = await this.collection().countDocuments(query);
+
+      if (page && limit) {
+        const skip = (page - 1) * limit;
+        const products = await cursor.skip(skip).limit(limit).toArray();
+
+        const totalPages = Math.ceil(totalItems / limit);
+
+        return {
+          data: products,
+          page,
+          limit,
+          totalItems,
+          totalPages,
+        };
+      }
+
+      const products = await cursor.toArray();
+      return {
+        totalItems,
+        products: products,
+      };
     } catch (error) {
       throw error;
     }

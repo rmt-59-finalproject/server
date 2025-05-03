@@ -3,7 +3,11 @@ const ProductModel = require("../models/product.model");
 class InventoryController {
   static async getInventories(req, res, next) {
     try {
-      const inventories = await ProductModel.getAll();
+      const search = req.query.search || "";
+      const page = req.query.page ? parseInt(req.query.page) : undefined;
+      const limit = req.query.limit ? parseInt(req.query.limit) : undefined;
+
+      const inventories = await ProductModel.getAll(search, page, limit);
 
       res.status(200).json(inventories);
     } catch (error) {
