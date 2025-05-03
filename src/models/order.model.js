@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const db = require("../config/mongodb");
 
 class OrderModel {
@@ -88,79 +89,75 @@ class OrderModel {
       const order = await this.collection().aggregate(
         [
           {
-            $match: {
-              _id: new ObjectId(id)
+            '$match': {
+              '_id': new ObjectId(id)
             }
-          },
-          {
-            $lookup: {
-              from: "users",
-              localField: "driverId",
-              foreignField: "_id",
-              as: "driver"
+          }, {
+            '$lookup': {
+              'from': 'users',
+              'localField': 'driverId',
+              'foreignField': '_id',
+              'as': 'driver'
             }
-          },
-          {
-            $unwind: {
-              path: "$driver",
-              preserveNullAndEmptyArrays: false
+          }, {
+            '$unwind': '$driver'
+          }, {
+            '$lookup': {
+              'from': 'users',
+              'localField': 'outletId',
+              'foreignField': '_id',
+              'as': 'outlet'
             }
-          },
-          {
-            $lookup: {
-              from: "users",
-              localField: "outletId",
-              foreignField: "_id",
-              as: "outlet"
+          }, {
+            '$unwind': '$outlet'
+          }, {
+            '$unwind': '$items'
+          }, {
+            '$lookup': {
+              'from': 'products',
+              'localField': 'items.productId',
+              'foreignField': '_id',
+              'as': 'items.product'
             }
-          },
-          {
-            $unwind: {
-              path: "$outlet",
-              preserveNullAndEmptyArrays: false
-            }
-          },
-          {
-            $unwind: "$items"
-          },
-          {
-            $lookup: {
-              from: "products",
-              localField: "items.productId",
-              foreignField: "_id",
-              as: "items.product"
-            }
-          },
-          {
-            $unwind: "$items.product"
-          },
-          {
-            $group: {
-              _id: "$_id",
-              driver: { $first: "$driver" },
-              outlet: { $first: "$outlet" },
-              items: {
-                $push: {
-                  name: "$items.product.name",
-                  quantity: "$items.quantity",
-                  unit: "$items.product.unit",
-                  category: "$items.product.category",
-                  checkedByDriver: "$items.checkedByDriver",
-                  driverCheckTime: "$items.driverCheckTime",
-                  checkedByOutlet: "$items.checkedByOutlet",
-                  outletCheckTime: "$items.outletCheckTime"
-                }
+          }, {
+            '$unwind': '$items.product'
+          }, {
+            '$group': {
+              '_id': '$_id',
+              'driver': {
+                '$first': '$driver'
               },
-              createdAt: { $first: "$createdAt" },
-              updatedAt: { $first: "$updatedAt" }
+              'outlet': {
+                '$first': '$outlet'
+              },
+              'status': {
+                '$first': '$status'
+              },
+              'createdAt': {
+                '$first': '$createdAt'
+              },
+              'updatedAt': {
+                '$first': '$updatedAt'
+              },
+              'items': {
+                '$push': {
+                  'name': '$items.product.name',
+                  'quantity': '$items.quantity',
+                  'unit': '$items.product.unit',
+                  'category': '$items.product.category',
+                  'checkedByDriver': '$items.checkedByDriver',
+                  'driverCheckTime': '$items.driverCheckTime',
+                  'checkedByOutlet': '$items.checkedByOutlet',
+                  'outletCheckTime': '$items.outletCheckTime'
+                }
+              }
             }
-          },
-          {
-            $project: {
-              "driver.password": 0,
-              "driver.refresh_token": 0,
-              "outlet.password": 0,
-              "outlet.refresh_token": 0
+          }, {
+            '$project': {
+              'driver.password': 0,
+              'driver.refresh_token': 0,
+              'outlet.password': 0,
+              'outlet.refresh_token': 0
             }
           }
         ]

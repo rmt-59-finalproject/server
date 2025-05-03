@@ -7,7 +7,7 @@ class UserModel {
     return db.collection("users");
   }
 
-  static async createUser(username, password, role) {
+  static async createUser(username, password, name, role) {
     try {
       // Check if user already exists
       const user = await this.collection().findOne({ username });
@@ -22,6 +22,7 @@ class UserModel {
         username,
         password: hashPassword(password),
         role,
+        name,
         refresh_token: null
       });
 
@@ -62,6 +63,7 @@ class UserModel {
       return {
         access_token,
         refresh_token,
+        name: user.name,
         role: user.role
       };
     } catch (error) {

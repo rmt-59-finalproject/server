@@ -1,3 +1,5 @@
+const { authentication } = require("../middlewares/auth.middleware");
+
 const router = require("express").Router();
 
 router.get("/", (req, res) => {
@@ -8,7 +10,8 @@ router.get("/", (req, res) => {
 });
 
 router.use(require('./user.routes'));
-router.use(require("./inventory.routes"));
-router.use('/orders', require('./order.routes'));
+router.use('/inventory', authentication, require("./inventory.routes"));
+router.use('/orders', authentication, require('./order.routes'));
+router.use('/driver', authentication, require('./driver.routes'));
 
 module.exports = router;
