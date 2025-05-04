@@ -478,7 +478,7 @@ Request:
 
 ```json
 {
-  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed"
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected"
 }
 ```
 
@@ -496,7 +496,7 @@ _Response (200 - OK)_
 [
   {
     "_id": "string",
-    "status": "requested" || "approved" || "in_transit" || "delivered" || "completed",
+    "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected",
     "items": [
       {
         "_id": "string",
@@ -577,6 +577,7 @@ _Response (200 - OK)_
     "username": "string",
     "role": "outlet"
   },
+  "notes": "string",
   "items": [
     {
       "_id": "string",
@@ -660,7 +661,8 @@ Request:
 
 ```json
 {
-  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed"
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected",
+  "notes (optional)": "string"
 }
 ```
 
@@ -762,7 +764,7 @@ Request:
 
 ```json
 {
-  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed"
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected"
 }
 ```
 
@@ -860,6 +862,7 @@ _Response (200 - OK)_
     "username": "string",
     "role": "outlet"
   },
+  "notes": "string",
   "items": [
     {
       "_id": "string",
@@ -966,7 +969,7 @@ Request:
 
 ```json
 {
-  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed"
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected"
 }
 ```
 
@@ -1049,6 +1052,7 @@ _Response (200 - OK)_
     "username": "string",
     "role": "outlet"
   },
+  "notes": "string",
   "status": "string",
   "items": [
     {

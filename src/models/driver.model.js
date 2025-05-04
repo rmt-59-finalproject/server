@@ -215,7 +215,7 @@ class DriverModel {
         },
         {
           $set: {
-            "items.$.checkedByDriver": status,
+            "items.$.checkedByDriver": status === 'true' ? true : false,
             "items.$.driverCheckTime": new Date(),
             updatedAt: new Date()
           }

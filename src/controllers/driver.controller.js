@@ -40,7 +40,7 @@ class DriverController {
       const { name, quantity, unit } = await DriverModel.updateItemStatus(driverId, id, productId, status);
 
       res.status(200).json({
-        message: `Checked ${quantity} ${unit} of ${name}.`
+        message: `${status === 'true' ? 'Checked' : 'Unchecked'} ${quantity} ${unit} of ${name}.`
       })
     } catch (error) {
       next(error);

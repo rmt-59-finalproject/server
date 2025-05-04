@@ -50,6 +50,9 @@ class OrderModel {
             'status': {
               '$first': '$status'
             },
+            'notes': {
+              '$first': '$notes'
+            },
             'items': {
               '$push': {
                 '_id': '$items.product._id',
@@ -111,6 +114,7 @@ class OrderModel {
       await this.collection().insertOne({
         outletId: new ObjectId(outletId),
         driverId: null,
+        notes: "",
         status: 'requested',
         items: newItem,
         createdAt: new Date,
@@ -174,6 +178,9 @@ class OrderModel {
               'status': {
                 '$first': '$status'
               },
+              'notes': {
+                '$first': '$notes'
+              },
               'createdAt': {
                 '$first': '$createdAt'
               },
@@ -215,20 +222,20 @@ class OrderModel {
     }
   }
 
-  static async patchOrderStatus(id, status) {
+  static async patchOrderStatus(id, status, notes) {
     try {
-      // "requested" | "approved" | "in_transit" | "delivered" | "completed"
+      // "requested" | "approved" | "in_transit" | "delivered" | "completed" | "rejected"
       const order = await this.collection().findOneAndUpdate(
         { _id: new ObjectId(id) },
-        { $set: { status, updatedAt: new Date() } },
+        { $set: { status, notes, updatedAt: new Date() } },
         { returnDocument: 'after' }
       )
 
-      if (!order.value) {
+      if (!order) {
         throw { name: 'NotFound', message: 'Order not found!' }
       }
 
-      return order.value;
+      return order;
     } catch (error) {
       throw error;
     }
@@ -247,7 +254,7 @@ class OrderModel {
         { returnDocument: 'after' }
       )
 
-      if (!order.value) {
+      if (!order) {
         throw { name: 'NotFound', message: 'Order not found!' }
       }
 
