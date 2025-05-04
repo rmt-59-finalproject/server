@@ -23,7 +23,7 @@ List of available endpoints.
   - [9. DELETE /api/inventory/:id](#9-delete-apiinventoryid)
 - [Orders](#orders)
   - [10. GET /api/orders](#10-get-apiorders)
-  - [11. GET /api/orders/:id](11-get-apiordersid)
+  - [11. GET /api/orders/:id](#11-get-apiordersid)
   - [12. POST /api/orders](#12-post-apiorders)
   - [13. PATCH /api/orders/:id](#13-patch-apiordersid)
   - [14. PATCH /api/orders/:id/driver](#14-patch-apiordersiddriver)
@@ -949,7 +949,7 @@ _Response (404 - Not Found)_
 
 # Outlet
 
-## 18. GET /api/driver/orders
+## 18. GET /api/outlet/orders
 
 Description:
 
