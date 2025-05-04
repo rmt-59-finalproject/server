@@ -5,6 +5,7 @@
   "main": "src/bin/www",
   "scripts": {
     "dev": "npx nodemon",
+    "start": "node src/bin/www",
     "test": "jest --detectOpenHandles --coverage"
   },
   "keywords": [],
