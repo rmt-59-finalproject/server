@@ -35,11 +35,17 @@ beforeAll(async () => {
   const accessTokenCookie = cookies.find((cookie) =>
     cookie.startsWith("access_token")
   );
+  const refreshTokenCookie = cookies.find((cookie) =>
+    cookie.startsWith("refresh_token")
+  );
 
   expect(accessTokenCookie).toBeDefined();
 
   if (accessTokenCookie) {
     access_token = accessTokenCookie.split(";")[0];
+  }
+  if (refreshTokenCookie) {
+    refresh_token = refreshTokenCookie.split(";")[0]; // Simpan refresh_token
   }
 });
 
