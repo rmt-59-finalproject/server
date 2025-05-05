@@ -31,7 +31,7 @@ class OutletController {
     try {
       const { id: outletId } = req.user;
       const { id } = req.params;
-      const { productId } = req.body;
+      const { productId, status } = req.body;
 
       if (!productId) {
         throw { name: "BadRequest", message: "Product ID is required." };
@@ -40,7 +40,8 @@ class OutletController {
       const { name, quantity, unit } = await OutletModel.updateItemStatus(
         outletId,
         id,
-        productId
+        productId,
+        status
       );
 
       res.status(200).json({
