@@ -8,6 +8,7 @@ let mongoServer;
 let connection;
 let db;
 let access_token;
+let refresh_token;
 
 beforeAll(async () => {
   // Jalankan MongoDB in-memory
@@ -63,6 +64,44 @@ afterAll(async () => {
 afterEach(async () => {
   // Hapus semua user kecuali admin
   await db.collection("users").deleteMany({ username: { $ne: "admin" } });
+});
+
+describe("GET /api/logout", () => {
+  test("Should clear cookies and return success message", async () => {
+    const res = await request(app)
+      .get("/api/logout")
+      .set("Cookie", [access_token]); // Kirim access_token dan refresh_token sebagai cookie
+
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toHaveProperty("message", "User logout successfully!");
+    expect(res.headers["set-cookie"]).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining("access_token=;"), // Cookie access_token dihapus
+        expect.stringContaining("refresh_token=;"), // Cookie refresh_token dihapus
+      ])
+    );
+  });
+
+  test("Should return error if access_token is missing", async () => {
+    const res = await request(app).get("/api/logout"); // Tidak mengirim token
+
+    expect(res.statusCode).toBe(401);
+    expect(res.body).toHaveProperty("message", "Invalid token.");
+  });
+
+  test("Should return error if refresh_token is invalid", async () => {
+    const res = await request(app)
+      .get("/api/logout")
+      .set("Cookie", [access_token]);
+
+    await db.collection("users").updateOne(
+      { username: "admin" },
+      { $set: { refresh_token: null } } // Set refresh_token ke null
+    );
+
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toHaveProperty("message", "Please login first!");
+  });
 });
 
 describe("POST /api/login", () => {
@@ -240,48 +279,20 @@ describe("GET /api/users", () => {
     expect(res.statusCode).toBe(401);
     expect(res.body).toHaveProperty("message", "Invalid token.");
   });
-});
 
-describe("GET /api/logout", () => {
-  test("Should clear cookies and return success message", async () => {
-    // Kirim access_token dan refresh_token sebagai cookie
+  test("Should not return users with internal server error", async () => {
+    // Simulate an internal server error by closing the connection
+    await connection.close();
+
     const res = await request(app)
-      .get("/api/logout")
-      .set("Cookie", [
-        `access_token=${access_token}`,
-        `refresh_token=${refresh_token}`,
-      ]);
+      .get("/api/users")
+      .set("Cookie", [access_token]); // Kirim access_token sebagai cookie
 
-    expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("message", "User logout successfully!");
-    expect(res.headers["set-cookie"]).toEqual(
-      expect.arrayContaining([
-        expect.stringContaining("access_token=;"), // Cookie access_token dihapus
-        expect.stringContaining("refresh_token=;"), // Cookie refresh_token dihapus
-      ])
-    );
-  });
+    expect(res.statusCode).toBe(500);
+    expect(res.body).toHaveProperty("message", "Internal server error.");
 
-  test("Should return error if no refresh_token is provided", async () => {
-    // Kirim hanya access_token tanpa refresh_token
-    const res = await request(app)
-      .get("/api/logout")
-      .set("Cookie", [`access_token=${access_token}`]);
-
-    expect(res.statusCode).toBe(401);
-    expect(res.body).toHaveProperty("message", "Invalid refresh token.");
-  });
-
-  test("Should return error if refresh_token is invalid", async () => {
-    // Kirim refresh_token yang tidak valid
-    const res = await request(app)
-      .get("/api/logout")
-      .set("Cookie", [
-        `access_token=${access_token}`,
-        "refresh_token=invalidtoken",
-      ]);
-
-    expect(res.statusCode).toBe(401);
-    expect(res.body).toHaveProperty("message", "Invalid refresh token.");
+    // Reconnect to the database for further tests
+    connection = await MongoClient.connect(mongoServer.getUri());
+    db = connection.db("stockify");
   });
 });

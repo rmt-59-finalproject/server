@@ -1,6 +1,9 @@
 const { ObjectId } = require("mongodb");
 const db = require("../config/mongodb");
-const productSchema = require("../validators/productSchema");
+const {
+  productSchema,
+  productUpdateSchema,
+} = require("../validators/productSchema");
 
 class ProductModel {
   static collection() {
@@ -98,9 +101,11 @@ class ProductModel {
         throw { name: "InvalidId", message: "Invalid product ID" };
       }
 
+      const validatedProduct = productUpdateSchema.parse(product);
+
       const result = await this.collection().findOneAndUpdate(
         { _id: new ObjectId(id) },
-        { $set: product },
+        { $set: validatedProduct },
         { returnDocument: "after" }
       );
 
