@@ -40,11 +40,18 @@ beforeAll(async () => {
   const accessTokenCookie = cookies.find((cookie) =>
     cookie.startsWith("access_token")
   );
+  const refreshTokenCookie = cookies.find((cookie) =>
+    cookie.startsWith("refresh_token")
+  );
 
   expect(accessTokenCookie).toBeDefined(); // Test ini akan gagal kalau login gagal
+  expect(refreshTokenCookie).toBeDefined(); // Pastikan refresh_token juga ada
 
   if (accessTokenCookie) {
     access_token = accessTokenCookie.split(";")[0]; // Simpan access_token
+  }
+  if (refreshTokenCookie) {
+    refresh_token = refreshTokenCookie.split(";")[0]; // Simpan refresh_token
   }
 });
 
@@ -237,12 +244,16 @@ describe("GET /api/users", () => {
 
 describe("GET /api/logout", () => {
   test("Should clear cookies and return success message", async () => {
+    // Kirim access_token dan refresh_token sebagai cookie
     const res = await request(app)
       .get("/api/logout")
-      .set("Cookie", [access_token]); // Kirim access_token sebagai cookie
+      .set("Cookie", [
+        `access_token=${access_token}`,
+        `refresh_token=${refresh_token}`,
+      ]);
 
     expect(res.statusCode).toBe(200);
-    expect(res.body).toHaveProperty("message", "Logout successful.");
+    expect(res.body).toHaveProperty("message", "User logout successfully!");
     expect(res.headers["set-cookie"]).toEqual(
       expect.arrayContaining([
         expect.stringContaining("access_token=;"), // Cookie access_token dihapus
@@ -251,10 +262,26 @@ describe("GET /api/logout", () => {
     );
   });
 
-  test("Should return error if no access token is provided", async () => {
-    const res = await request(app).get("/api/logout"); // Tidak mengirim token
+  test("Should return error if no refresh_token is provided", async () => {
+    // Kirim hanya access_token tanpa refresh_token
+    const res = await request(app)
+      .get("/api/logout")
+      .set("Cookie", [`access_token=${access_token}`]);
 
     expect(res.statusCode).toBe(401);
-    expect(res.body).toHaveProperty("message", "Invalid token.");
+    expect(res.body).toHaveProperty("message", "Invalid refresh token.");
+  });
+
+  test("Should return error if refresh_token is invalid", async () => {
+    // Kirim refresh_token yang tidak valid
+    const res = await request(app)
+      .get("/api/logout")
+      .set("Cookie", [
+        `access_token=${access_token}`,
+        "refresh_token=invalidtoken",
+      ]);
+
+    expect(res.statusCode).toBe(401);
+    expect(res.body).toHaveProperty("message", "Invalid refresh token.");
   });
 });
