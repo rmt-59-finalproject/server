@@ -23,7 +23,12 @@ class OutletModel {
             as: "driver",
           },
         },
-        { $unwind: "$driver" },
+        {
+          $unwind: {
+            path: "$driver",
+            preserveNullAndEmptyArrays: true,
+          },
+        },
         {
           $lookup: {
             from: "users",
@@ -104,7 +109,12 @@ class OutletModel {
               as: "driver",
             },
           },
-          { $unwind: "$driver" },
+          {
+            $unwind: {
+              path: "$driver",
+              preserveNullAndEmptyArrays: true,
+            },
+          },
           {
             $lookup: {
               from: "users",
@@ -166,7 +176,7 @@ class OutletModel {
     }
   }
 
-  static async updateItemStatus(outletId, orderId, productId) {
+  static async updateItemStatus(outletId, orderId, productId, status) {
     try {
       const order = await this.collection().findOneAndUpdate(
         {
@@ -176,7 +186,7 @@ class OutletModel {
         },
         {
           $set: {
-            "items.$.checkedByOutlet": true,
+            "items.$.checkedByDriver": status === "true" ? true : false,
             "items.$.outletCheckTime": new Date(),
             updatedAt: new Date(),
           },
