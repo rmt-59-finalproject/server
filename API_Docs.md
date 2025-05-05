@@ -1110,6 +1110,7 @@ Request:
 ```json
 {
   "productId": "string - productId (required)",
+  "status": "boolean - item status checked or not (required)"
 }
 ```
 
