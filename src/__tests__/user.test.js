@@ -106,7 +106,7 @@ describe("GET /api/login (checkToken)", () => {
   test("Should return valid token and set access_token cookie", async () => {
     const res = await request(app)
       .get("/api/login")
-      .set("Cookie", [access_token]); // Kirim refresh_token sebagai cookie
+      .set("Cookie", [access_token]); // Kirim access_token sebagai cookie
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("message", "Token is valid.");
