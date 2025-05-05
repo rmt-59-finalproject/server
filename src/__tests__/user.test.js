@@ -8,6 +8,7 @@ let mongoServer;
 let connection;
 let db;
 let access_token;
+let refresh_token;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
