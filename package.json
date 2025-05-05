@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "npx nodemon",
     "start": "node src/bin/www",
-    "test": "jest --detectOpenHandles --forceExit --verbose --silent"
+    "test": "jest --detectOpenHandles --forceExit --verbose --silent",
+    "detail_test": "jest --detectOpenHandles --forceExit --verbose --coverage"
   },
   "keywords": [],
   "author": "",

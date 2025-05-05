@@ -16,7 +16,7 @@ class OrderController {
     try {
       const { id: outletId } = req.user;
       if (!req.body) {
-        throw { name: 'BadRequest', message: 'Items is required.' }
+        throw { name: "BadRequest", message: "Items is required." };
       }
 
       const { items } = req.body;
@@ -24,8 +24,8 @@ class OrderController {
       const { message } = await OrderModel.postOrder(items, outletId);
 
       res.status(201).json({
-        message
-      })
+        message,
+      });
     } catch (error) {
       next(error);
     }
@@ -47,15 +47,15 @@ class OrderController {
     try {
       const { id } = req.params;
       if (!req.body) {
-        throw { name: 'BadRequest', message: 'Updated status is required.' }
+        throw { name: "BadRequest", message: "Updated status is required." };
       }
 
-      const { status, notes = '' } = req.body;
+      const { status, notes = "" } = req.body;
 
       const order = await OrderModel.patchOrderStatus(id, status, notes);
 
       res.status(200).json({
-        message: `Successfully update order status to ${order.status}`
+        message: `Successfully update order status to ${order.status}`,
       });
     } catch (error) {
       next(error);
@@ -66,7 +66,7 @@ class OrderController {
     try {
       const { id } = req.params;
       if (!req.body) {
-        throw { name: 'BadRequest', message: 'Driver is required.' }
+        throw { name: "BadRequest", message: "Driver is required." };
       }
 
       const { driverId } = req.body;
@@ -74,8 +74,8 @@ class OrderController {
       const { driver } = await OrderModel.patchOrderDriver(id, driverId);
 
       res.status(200).json({
-        message: `Successfully assign order to ${driver.username}`
-      })
+        message: `Successfully assign order to ${driver.username}`,
+      });
     } catch (error) {
       next(error);
     }
