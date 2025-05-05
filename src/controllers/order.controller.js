@@ -54,9 +54,9 @@ class OrderController {
         throw { name: 'BadRequest', message: 'Updated status is required.' }
       }
 
-      const { status } = req.body;
+      const { status, notes = '' } = req.body;
 
-      const order = await OrderModel.patchOrderStatus(id, status);
+      const order = await OrderModel.patchOrderStatus(id, status, notes);
 
       res.status(200).json({
         message: `Successfully update order status to ${order.status}`
