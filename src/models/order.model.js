@@ -10,88 +10,93 @@ class OrderModel {
     try {
       const pipeline = [
         {
-          '$lookup': {
-            'from': 'users',
-            'localField': 'driverId',
-            'foreignField': '_id',
-            'as': 'driver'
-          }
-        }, {
-          '$unwind': '$driver'
-        }, {
-          '$lookup': {
-            'from': 'users',
-            'localField': 'outletId',
-            'foreignField': '_id',
-            'as': 'outlet'
-          }
-        }, {
-          '$unwind': '$outlet'
-        }, {
-          '$unwind': '$items'
-        }, {
-          '$lookup': {
-            'from': 'products',
-            'localField': 'items.productId',
-            'foreignField': '_id',
-            'as': 'items.product'
-          }
-        }, {
-          '$unwind': '$items.product'
-        }, {
-          '$group': {
-            '_id': '$_id',
-            'orderId': {
-              '$first': '$orderId'
+          $lookup: {
+            from: "users",
+            localField: "driverId",
+            foreignField: "_id",
+            as: "driver",
+          },
+        },
+        {
+          $unwind: "$driver",
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "outletId",
+            foreignField: "_id",
+            as: "outlet",
+          },
+        },
+        {
+          $unwind: "$outlet",
+        },
+        {
+          $unwind: "$items",
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "items.productId",
+            foreignField: "_id",
+            as: "items.product",
+          },
+        },
+        {
+          $unwind: "$items.product",
+        },
+        {
+          $group: {
+            _id: "$_id",
+            driver: {
+              $first: "$driver",
             },
-            'driver': {
-              '$first': '$driver'
+            outlet: {
+              $first: "$outlet",
             },
-            'outlet': {
-              '$first': '$outlet'
+            status: {
+              $first: "$status",
             },
-            'status': {
-              '$first': '$status'
+            notes: {
+              $first: "$notes",
             },
-            'notes': {
-              '$first': '$notes'
+            items: {
+              $push: {
+                _id: "$items.product._id",
+                name: "$items.product.name",
+                quantity: "$items.quantity",
+                unit: "$items.product.unit",
+                category: "$items.product.category",
+                checkedByDriver: "$items.checkedByDriver",
+                driverCheckTime: "$items.driverCheckTime",
+                checkedByOutlet: "$items.checkedByOutlet",
+                outletCheckTime: "$items.outletCheckTime",
+              },
             },
-            'items': {
-              '$push': {
-                '_id': '$items.product._id',
-                'name': '$items.product.name',
-                'quantity': '$items.quantity',
-                'unit': '$items.product.unit',
-                'category': '$items.product.category',
-                'checkedByDriver': '$items.checkedByDriver',
-                'driverCheckTime': '$items.driverCheckTime',
-                'checkedByOutlet': '$items.checkedByOutlet',
-                'outletCheckTime': '$items.outletCheckTime'
-              }
+            createdAt: {
+              $first: "$createdAt",
             },
-            'createdAt': {
-              '$first': '$createdAt'
+            updatedAt: {
+              $first: "$updatedAt",
             },
-            'updatedAt': {
-              '$first': '$updatedAt'
-            }
-          }
-        }, {
-          '$project': {
-            'driver.password': 0,
-            'driver.refresh_token': 0,
-            'outlet.password': 0,
-            'outlet.refresh_token': 0
-          }
-        }
+          },
+        },
+        {
+          $project: {
+            "driver.password": 0,
+            "driver.refresh_token": 0,
+            "outlet.password": 0,
+            "outlet.refresh_token": 0,
+          },
+        },
       ];
 
       // Add the $match stage only if status is provided
       if (status) {
         pipeline.splice(11, 0, {
-          '$match': {
-            'status': status
-          }
+          $match: {
+            status: status,
+          },
         });
       }
 
@@ -105,13 +110,13 @@ class OrderModel {
 
   static async postOrder(items, outletId) {
     try {
-      const newItem = items.map(item => ({
+      const newItem = items.map((item) => ({
         ...item,
         productId: new ObjectId(item.productId),
         checkedByDriver: false,
         driverCheckTime: null,
         checkedByOutlet: false,
-        outletCheckTime: null
+        outletCheckTime: null,
       }));
 
       await this.collection().insertOne({
@@ -119,15 +124,15 @@ class OrderModel {
         outletId: new ObjectId(outletId),
         driverId: null,
         notes: "",
-        status: 'requested',
+        status: "requested",
         items: newItem,
-        createdAt: new Date,
-        updatedAt: new Date
-      })
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      });
 
       return {
-        message: 'Successfully create new order.'
-      }
+        message: "Successfully create new order.",
+      };
     } catch (error) {
       throw error;
     }
@@ -135,92 +140,98 @@ class OrderModel {
 
   static async getOrderById(id) {
     try {
-      const order = await this.collection().aggregate(
-        [
+      const order = await this.collection()
+        .aggregate([
           {
-            '$match': {
-              '_id': new ObjectId(id)
-            }
-          }, {
-            '$lookup': {
-              'from': 'users',
-              'localField': 'driverId',
-              'foreignField': '_id',
-              'as': 'driver'
-            }
-          }, {
-            '$unwind': '$driver'
-          }, {
-            '$lookup': {
-              'from': 'users',
-              'localField': 'outletId',
-              'foreignField': '_id',
-              'as': 'outlet'
-            }
-          }, {
-            '$unwind': '$outlet'
-          }, {
-            '$unwind': '$items'
-          }, {
-            '$lookup': {
-              'from': 'products',
-              'localField': 'items.productId',
-              'foreignField': '_id',
-              'as': 'items.product'
-            }
-          }, {
-            '$unwind': '$items.product'
-          }, {
-            '$group': {
-              '_id': '$_id',
-              'orderId': {
-                '$first': '$orderId'
+            $match: {
+              _id: new ObjectId(id),
+            },
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "driverId",
+              foreignField: "_id",
+              as: "driver",
+            },
+          },
+          {
+            $unwind: "$driver",
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "outletId",
+              foreignField: "_id",
+              as: "outlet",
+            },
+          },
+          {
+            $unwind: "$outlet",
+          },
+          {
+            $unwind: "$items",
+          },
+          {
+            $lookup: {
+              from: "products",
+              localField: "items.productId",
+              foreignField: "_id",
+              as: "items.product",
+            },
+          },
+          {
+            $unwind: "$items.product",
+          },
+          {
+            $group: {
+              _id: "$_id",
+              driver: {
+                $first: "$driver",
               },
-              'driver': {
-                '$first': '$driver'
+              outlet: {
+                $first: "$outlet",
               },
-              'outlet': {
-                '$first': '$outlet'
+              status: {
+                $first: "$status",
               },
-              'status': {
-                '$first': '$status'
+              notes: {
+                $first: "$notes",
               },
-              'notes': {
-                '$first': '$notes'
+              createdAt: {
+                $first: "$createdAt",
               },
-              'createdAt': {
-                '$first': '$createdAt'
+              updatedAt: {
+                $first: "$updatedAt",
               },
-              'updatedAt': {
-                '$first': '$updatedAt'
+              items: {
+                $push: {
+                  _id: "$items.product._id",
+                  name: "$items.product.name",
+                  quantity: "$items.quantity",
+                  unit: "$items.product.unit",
+                  category: "$items.product.category",
+                  checkedByDriver: "$items.checkedByDriver",
+                  driverCheckTime: "$items.driverCheckTime",
+                  checkedByOutlet: "$items.checkedByOutlet",
+                  outletCheckTime: "$items.outletCheckTime",
+                },
               },
-              'items': {
-                '$push': {
-                  '_id': '$items.product._id',
-                  'name': '$items.product.name',
-                  'quantity': '$items.quantity',
-                  'unit': '$items.product.unit',
-                  'category': '$items.product.category',
-                  'checkedByDriver': '$items.checkedByDriver',
-                  'driverCheckTime': '$items.driverCheckTime',
-                  'checkedByOutlet': '$items.checkedByOutlet',
-                  'outletCheckTime': '$items.outletCheckTime'
-                }
-              }
-            }
-          }, {
-            '$project': {
-              'driver.password': 0,
-              'driver.refresh_token': 0,
-              'outlet.password': 0,
-              'outlet.refresh_token': 0
-            }
-          }
-        ]
-      ).toArray();
+            },
+          },
+          {
+            $project: {
+              "driver.password": 0,
+              "driver.refresh_token": 0,
+              "outlet.password": 0,
+              "outlet.refresh_token": 0,
+            },
+          },
+        ])
+        .toArray();
 
       if (order.length === 0) {
-        throw { name: 'NotFound', message: 'Order not found!' }
+        throw { name: "NotFound", message: "Order not found!" };
       }
 
       return order[0];
@@ -235,11 +246,11 @@ class OrderModel {
       const order = await this.collection().findOneAndUpdate(
         { _id: new ObjectId(id) },
         { $set: { status, notes, updatedAt: new Date() } },
-        { returnDocument: 'after' }
-      )
+        { returnDocument: "after" }
+      );
 
       if (!order) {
-        throw { name: 'NotFound', message: 'Order not found!' }
+        throw { name: "NotFound", message: "Order not found!" };
       }
 
       return order;
@@ -250,24 +261,26 @@ class OrderModel {
 
   static async patchOrderDriver(id, driverId) {
     try {
-      const driver = await db.collection("users").findOne({ _id: new ObjectId(driverId) });
+      const driver = await db
+        .collection("users")
+        .findOne({ _id: new ObjectId(driverId) });
       if (!driver) {
-        throw { name: 'NotFound', message: 'Driver not found!' }
+        throw { name: "NotFound", message: "Driver not found!" };
       }
 
       const order = await this.collection().findOneAndUpdate(
         { _id: new ObjectId(id) },
         { $set: { driverId: new ObjectId(driverId), updatedAt: new Date() } },
-        { returnDocument: 'after' }
-      )
+        { returnDocument: "after" }
+      );
 
       if (!order) {
-        throw { name: 'NotFound', message: 'Order not found!' }
+        throw { name: "NotFound", message: "Order not found!" };
       }
 
       return {
-        driver
-      }
+        driver,
+      };
     } catch (error) {
       throw error;
     }
