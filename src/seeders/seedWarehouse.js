@@ -9,6 +9,7 @@ const { hashPassword } = require('../helpers/bcrypt');
 
     // Insert warehouse admin
     await db.collection("users").insertOne({
+      name: 'Stockify',
       username: "stockify",
       password: hashPassword(process.env.WAREHOUSE_PASSWORD),
       role: "warehouse"

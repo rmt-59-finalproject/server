@@ -38,7 +38,7 @@ class OutletController {
       }
       
       if (!status) {
-        throw { name: 'BadRequest', message: 'Product ID is required.' }
+        throw { name: 'BadRequest', message: 'Status is required.' }
       }
 
       const { name, quantity, unit } = await OutletModel.updateItemStatus(

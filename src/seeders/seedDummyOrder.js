@@ -15,6 +15,7 @@ function parseItem(item) {
 
 function parseOrder(order) {
   return {
+    orderId: order.orderId,
     outletId: new ObjectId(order.outletId),
     driverId: new ObjectId(order.driverId),
     items: order.items.map(parseItem),

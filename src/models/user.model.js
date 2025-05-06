@@ -94,6 +94,9 @@ class UserModel {
 
       return {
         access_token,
+        name: user.name,
+        role: user.role,
+        username: user.username
       }
     } catch (error) {
       throw error;

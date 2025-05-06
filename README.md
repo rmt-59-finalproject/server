@@ -11,8 +11,8 @@
     REFRESH_TOKEN_SECRET=YOUR_REFRESH_TOKEN_SECRET
     WAREHOUSE_PASSWORD=YOUR_WAREHOUSE_ADMIN_PASSWORD
     ```
-3. node src/seeders/seedWarehouse.js && 
-   node src/seeders/seedUsers.js && 
+3. node src/seeders/seedUsers.js && 
+   node src/seeders/seedWarehouse.js && 
    node src/seeders/seedProduct.js && 
    node src/seeders/seedDummyOrder.js
 4. npm run start

@@ -72,7 +72,7 @@ class UserController {
       }
 
       // Check if the refresh token is valid
-      const { access_token } = await UserModel.checkToken(refresh_token);
+      const { access_token, name, role, username } = await UserModel.checkToken(refresh_token);
 
       // Set the access token in the response cookies
       res.cookie('access_token', `Bearer ${access_token}`, {
@@ -83,6 +83,11 @@ class UserController {
 
       res.status(200).json({
         message: "Token is valid.",
+        data: {
+          username,
+          role,
+          name
+        }
       });
     } catch (error) {
       next(error);
