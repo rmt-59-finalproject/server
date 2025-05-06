@@ -10,7 +10,6 @@ let db;
 let access_token;
 
 beforeAll(async () => {
-<<<<<<< HEAD
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
 
@@ -20,31 +19,12 @@ beforeAll(async () => {
   const originalDb = require("../config/mongodb");
   Object.assign(originalDb, db);
 
-=======
-  // Jalankan MongoDB in-memory
-  mongoServer = await MongoMemoryServer.create();
-  const uri = mongoServer.getUri();
-
-  // Connect ke test database
-  connection = await MongoClient.connect(uri);
-  db = connection.db("stockify");
-
-  // Inject test DB ke config asli
-  const originalDb = require("../config/mongodb");
-  Object.assign(originalDb, db);
-
-  // Buat user driver untuk autentikasi
->>>>>>> 79b3300 (feat: update-testing)
   const driver = await db.collection("users").insertOne({
     username: "driver1",
     password: hashPassword("12345"),
     role: "driver",
   });
 
-<<<<<<< HEAD
-=======
-  // Login sebagai driver
->>>>>>> 79b3300 (feat: update-testing)
   const loginRes = await request(app)
     .post("/api/login")
     .send({ username: "driver1", password: "12345" });
@@ -68,10 +48,7 @@ afterEach(async () => {
 
 describe("GET api/driver/orders", () => {
   test("Should return a list of orders assigned to the driver (success)", async () => {
-<<<<<<< HEAD
-=======
-    // Tambahkan data dummy produk
->>>>>>> 79b3300 (feat: update-testing)
+
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
@@ -116,10 +93,6 @@ describe("GET api/driver/orders", () => {
   });
 
   test("Should filter orders by status", async () => {
-<<<<<<< HEAD
-=======
-    // Tambahkan data dummy produk
->>>>>>> 79b3300 (feat: update-testing)
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
@@ -198,10 +171,6 @@ describe("GET api/driver/orders", () => {
   });
 
   test("Should handle errors gracefully", async () => {
-<<<<<<< HEAD
-=======
-    // Simulasikan error dengan memmock DriverModel.getAllOrders
->>>>>>> 79b3300 (feat: update-testing)
     jest
       .spyOn(require("../models/driver.model"), "getAllOrders")
       .mockImplementationOnce(() => {
@@ -217,20 +186,12 @@ describe("GET api/driver/orders", () => {
   });
 
   test("Should return 403 if user is not authorized", async () => {
-<<<<<<< HEAD
-=======
-    // Tambahkan data dummy user dengan peran yang tidak diizinkan (misalnya, outlet)
->>>>>>> 79b3300 (feat: update-testing)
     const outlet = await db.collection("users").insertOne({
       username: "outlet1",
       password: hashPassword("12345"),
       role: "outlet",
     });
 
-<<<<<<< HEAD
-=======
-    // Login sebagai outlet
->>>>>>> 79b3300 (feat: update-testing)
     const loginRes = await request(app)
       .post("/api/login")
       .send({ username: "outlet1", password: "12345" });
@@ -241,10 +202,6 @@ describe("GET api/driver/orders", () => {
     );
     const outletAccessToken = accessTokenCookie.split(";")[0];
 
-<<<<<<< HEAD
-=======
-    // Coba akses endpoint dengan token outlet
->>>>>>> 79b3300 (feat: update-testing)
     const res = await request(app)
       .get("/api/driver/orders")
       .set("Cookie", [outletAccessToken]);
@@ -259,10 +216,7 @@ describe("GET api/driver/orders", () => {
 
 describe("GET /api/driver/orders/:id", () => {
   test("Should return a single order by ID (success)", async () => {
-<<<<<<< HEAD
-=======
-    // Tambahkan data dummy produk
->>>>>>> 79b3300 (feat: update-testing)
+
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
@@ -311,11 +265,7 @@ describe("GET /api/driver/orders/:id", () => {
 
   test("Should return 404 if order not found", async () => {
     const res = await request(app)
-<<<<<<< HEAD
       .get(`/api/driver/orders/${new ObjectId().toString()}`)
-=======
-      .get(`/api/driver/orders/${new ObjectId().toString()}`) // ID valid tetapi tidak ada di database
->>>>>>> 79b3300 (feat: update-testing)
       .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(404);
@@ -324,11 +274,7 @@ describe("GET /api/driver/orders/:id", () => {
 
   test("Should return 400 if ID is invalid", async () => {
     const res = await request(app)
-<<<<<<< HEAD
       .get("/api/driver/orders/invalid-id")
-=======
-      .get("/api/driver/orders/invalid-id") // ID tidak valid
->>>>>>> 79b3300 (feat: update-testing)
       .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(400);
@@ -343,20 +289,13 @@ describe("GET /api/driver/orders/:id", () => {
   });
 
   test("Should return 403 if user is not authorized", async () => {
-<<<<<<< HEAD
-=======
-    // Tambahkan data dummy user dengan peran yang tidak diizinkan (misalnya, outlet)
->>>>>>> 79b3300 (feat: update-testing)
+
     const outlet = await db.collection("users").insertOne({
       username: "outlet1",
       password: hashPassword("12345"),
       role: "outlet",
     });
 
-<<<<<<< HEAD
-=======
-    // Login sebagai outlet
->>>>>>> 79b3300 (feat: update-testing)
     const loginRes = await request(app)
       .post("/api/login")
       .send({ username: "outlet1", password: "12345" });
@@ -367,10 +306,6 @@ describe("GET /api/driver/orders/:id", () => {
     );
     const outletAccessToken = accessTokenCookie.split(";")[0];
 
-<<<<<<< HEAD
-=======
-    // Coba akses endpoint dengan token outlet
->>>>>>> 79b3300 (feat: update-testing)
     const res = await request(app)
       .get(`/api/driver/orders/${new ObjectId()}`)
       .set("Cookie", [outletAccessToken]);
@@ -383,10 +318,6 @@ describe("GET /api/driver/orders/:id", () => {
   });
 
   test("Should handle errors gracefully", async () => {
-<<<<<<< HEAD
-=======
-    // Simulasikan error dengan memmock DriverModel.getOrdersById
->>>>>>> 79b3300 (feat: update-testing)
     jest
       .spyOn(require("../models/driver.model"), "getOrdersById")
       .mockImplementationOnce(() => {
@@ -404,10 +335,7 @@ describe("GET /api/driver/orders/:id", () => {
 
 describe("PATCH /api/driver/orders/:id", () => {
   test("Should update item status (success)", async () => {
-<<<<<<< HEAD
-=======
-    // Tambahkan data dummy produk
->>>>>>> 79b3300 (feat: update-testing)
+
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
@@ -511,11 +439,7 @@ describe("PATCH /api/driver/orders/:id", () => {
       .patch(`/api/driver/orders/${order.insertedId}`)
       .set("Cookie", [access_token])
       .send({
-<<<<<<< HEAD
         productId: new ObjectId().toString(),
-=======
-        productId: new ObjectId().toString(), // ID valid tetapi tidak ada di database
->>>>>>> 79b3300 (feat: update-testing)
         status: "true",
       });
 
