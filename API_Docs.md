@@ -1,12 +1,15 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=18604804&assignment_repo_type=AssignmentRepo)
 
 <!-- omit in toc -->
+
 # Stockify API Documentation
 
 ### Endpoints :
 
 List of available endpoints.
 
+- [Stockify API Documentation](#stockify-api-documentation)
+    - [Endpoints :](#endpoints-)
 - [User](#user)
   - [1. POST /api/register](#1-post-apiregister)
   - [2. POST /api/login](#2-post-apilogin)
@@ -298,7 +301,7 @@ Request:
 ```
 
 _Response (200 - OK)_
-  
+
 ```json
 {
   "totalItems": "number",
@@ -479,7 +482,8 @@ Request:
 ```json
 {
   "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected"
-}
+"orderId": "string",}
+
 ```
 
 - cookies:
@@ -497,6 +501,7 @@ _Response (200 - OK)_
   {
     "_id": "string",
     "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected",
+    "orderId": "string",
     "items": [
       {
         "_id": "string",
@@ -567,17 +572,8 @@ _Response (200 - OK)_
 ```json
 {
   "_id": "string",
-  "driver": {
-    "_id": "string",
-    "username": "string",
-    "role": "driver"
-  },
-  "outlet": {
-    "_id": "string",
-    "username": "string",
-    "role": "outlet"
-  },
-  "notes": "string",
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected",
+  "orderId": "string",
   "items": [
     {
       "_id": "string",
@@ -593,7 +589,19 @@ _Response (200 - OK)_
     ...
   ],
   "createdAt": "date",
-  "updatedAt": "date"
+  "updatedAt": "date",
+  "driver": {
+    "_id": "string",
+    "username": "string",
+    "name": "string",
+    "role": "driver"
+  },
+  "outlet": {
+    "_id": "string",
+    "username": "string",
+    "name": "string",
+    "role": "outlet"
+  }
 }
 ```
 
@@ -782,18 +790,8 @@ _Response (200 - OK)_
 [
   {
     "_id": "string",
-    "driver": {
-      "_id": "string",
-      "username": "string",
-      "name": "string",
-      "role": "driver"
-    },
-    "outlet": {
-      "_id": "string",
-      "username": "string",
-      "name": "string",
-      "role": "outlet"
-    },
+    "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected",
+    "orderId": "string",
     "items": [
       {
         "_id": "string",
@@ -809,7 +807,19 @@ _Response (200 - OK)_
       ...
     ],
     "createdAt": "date",
-    "updatedAt": "date"
+    "updatedAt": "date",
+    "driver": {
+      "_id": "string",
+      "username": "string",
+      "name": "string",
+      "role": "driver"
+    },
+    "outlet": {
+      "_id": "string",
+      "username": "string",
+      "name": "string",
+      "role": "outlet"
+    }
   },
   ...
 ]
@@ -852,17 +862,8 @@ _Response (200 - OK)_
 ```json
 {
   "_id": "string",
-  "driver": {
-    "_id": "string",
-    "username": "string",
-    "role": "driver"
-  },
-  "outlet": {
-    "_id": "string",
-    "username": "string",
-    "role": "outlet"
-  },
-  "notes": "string",
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected",
+  "orderId": "string",
   "items": [
     {
       "_id": "string",
@@ -878,7 +879,19 @@ _Response (200 - OK)_
     ...
   ],
   "createdAt": "date",
-  "updatedAt": "date"
+  "updatedAt": "date",
+  "driver": {
+    "_id": "string",
+    "username": "string",
+    "name": "string",
+    "role": "driver"
+  },
+  "outlet": {
+    "_id": "string",
+    "username": "string",
+    "name": "string",
+    "role": "outlet"
+  }
 }
 ```
 
@@ -927,7 +940,11 @@ _Response (200 - OK)_
 
 ```json
 {
-  "message": "Checked <quantity> <unit> of <product name>."
+  "message": "Driver checked <quantity> <unit> of <product name>."
+}
+OR
+{
+  "message": "Driver unchecked <quantity> <unit> of <product name>."
 }
 ```
 
@@ -979,19 +996,8 @@ _Response (200 - OK)_
 [
   {
     "_id": "string",
-    "driver": {
-      "_id": "string",
-      "username": "string",
-      "name": "string",
-      "role": "driver"
-    },
-    "outlet": {
-      "_id": "string",
-      "username": "string",
-      "name": "string",
-      "role": "outlet"
-    },
-    "status": "string",
+    "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected",
+    "orderId": "string",
     "items": [
       {
         "_id": "string",
@@ -1007,9 +1013,21 @@ _Response (200 - OK)_
       ...
     ],
     "createdAt": "date",
-    "updatedAt": "date"
+    "updatedAt": "date",
+    "driver": {
+      "_id": "string",
+      "username": "string",
+      "name": "string",
+      "role": "driver"
+    },
+    "outlet": {
+      "_id": "string",
+      "username": "string",
+      "name": "string",
+      "role": "outlet"
+    }
   },
-    ...
+  ...
 ]
 ```
 
@@ -1042,18 +1060,8 @@ _Response (200 - OK)_
 ```json
 {
   "_id": "string",
-  "driver": {
-    "_id": "string",
-    "username": "string",
-    "role": "driver"
-  },
-  "outlet": {
-    "_id": "string",
-    "username": "string",
-    "role": "outlet"
-  },
-  "notes": "string",
-  "status": "string",
+  "status": "requested" || "approved" || "in_transit" || "delivered" || "completed" || "rejected",
+  "orderId": "string",
   "items": [
     {
       "_id": "string",
@@ -1069,7 +1077,19 @@ _Response (200 - OK)_
     ...
   ],
   "createdAt": "date",
-  "updatedAt": "date"
+  "updatedAt": "date",
+  "driver": {
+    "_id": "string",
+    "username": "string",
+    "name": "string",
+    "role": "driver"
+  },
+  "outlet": {
+    "_id": "string",
+    "username": "string",
+    "name": "string",
+    "role": "outlet"
+  }
 }
 ```
 
@@ -1119,6 +1139,10 @@ _Response (200 - OK)_
 ```json
 {
   "message": "Outlet checked <quantity> <unit> of <product name>."
+}
+OR
+{
+  "message": "Outlet unchecked <quantity> <unit> of <product name>."
 }
 ```
 

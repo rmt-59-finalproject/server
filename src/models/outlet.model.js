@@ -51,6 +51,9 @@ class OutletModel {
         {
           $group: {
             _id: "$_id",
+            'orderId': {
+              '$first': '$orderId'
+            },
             driver: { $first: "$driver" },
             outlet: { $first: "$outlet" },
             status: { $first: "$status" },
@@ -137,6 +140,9 @@ class OutletModel {
           {
             $group: {
               _id: "$_id",
+              'orderId': {
+                '$first': '$orderId'
+              },
               driver: { $first: "$driver" },
               outlet: { $first: "$outlet" },
               status: { $first: "$status" },
