@@ -41,6 +41,9 @@ class OrderModel {
         }, {
           '$group': {
             '_id': '$_id',
+            'orderId': {
+              '$first': '$orderId'
+            },
             'driver': {
               '$first': '$driver'
             },
@@ -112,6 +115,7 @@ class OrderModel {
       }));
 
       await this.collection().insertOne({
+        orderId: `ORD-${require('crypto').randomBytes(3).toString().toUpperCase()}`,
         outletId: new ObjectId(outletId),
         driverId: null,
         notes: "",
@@ -169,6 +173,9 @@ class OrderModel {
           }, {
             '$group': {
               '_id': '$_id',
+              'orderId': {
+                '$first': '$orderId'
+              },
               'driver': {
                 '$first': '$driver'
               },

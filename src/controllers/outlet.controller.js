@@ -34,7 +34,11 @@ class OutletController {
       const { productId, status } = req.body;
 
       if (!productId) {
-        throw { name: "BadRequest", message: "Product ID is required." };
+        throw { name: 'BadRequest', message: 'Product ID is required.' }
+      }
+      
+      if (!status) {
+        throw { name: 'BadRequest', message: 'Product ID is required.' }
       }
 
       const { name, quantity, unit } = await OutletModel.updateItemStatus(
@@ -45,7 +49,7 @@ class OutletController {
       );
 
       res.status(200).json({
-        message: `Outlet checked ${quantity} ${unit} of ${name}.`,
+        message: `Outlet ${status === 'true' ? 'checked' : 'unchecked'} ${quantity} ${unit} of ${name}.`,
       });
     } catch (error) {
       next(error);

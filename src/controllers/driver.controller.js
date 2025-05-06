@@ -36,11 +36,15 @@ class DriverController {
       if (!productId) {
         throw { name: 'BadRequest', message: 'Product ID is required.' }
       }
+      
+      if (!status) {
+        throw { name: 'BadRequest', message: 'Product ID is required.' }
+      }
 
       const { name, quantity, unit } = await DriverModel.updateItemStatus(driverId, id, productId, status);
 
       res.status(200).json({
-        message: `${status === 'true' ? 'Checked' : 'Unchecked'} ${quantity} ${unit} of ${name}.`
+        message: `Driver ${status === 'true' ? 'checked' : 'unchecked'} ${quantity} ${unit} of ${name}.`
       })
     } catch (error) {
       next(error);
