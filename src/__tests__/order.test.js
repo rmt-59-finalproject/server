@@ -11,30 +11,25 @@ let access_token;
 let refresh_token;
 
 beforeAll(async () => {
-  // Jalankan MongoDB in-memory
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
 
-  // Connect ke test database
   connection = await MongoClient.connect(uri);
   db = connection.db("stockify");
 
-  // Inject test DB ke config asli
   const originalDb = require("../config/mongodb");
   Object.assign(originalDb, db);
 
-  // Buat user untuk autentikasi
   await db.collection("users").insertOne({
     username: "admin",
-    password: hashPassword("12345"), // ini yang benar
+    password: hashPassword("12345"),
     name: "Admin Warehouse",
     role: "warehouse",
   });
 
-  // Buat access_token untuk user
   const loginRes = await request(app)
-    .post("/api/login") // 🔥 ini penting! gunakan path yang benar
-    .send({ username: "admin", password: "12345" }); // password harus cocok
+    .post("/api/login")
+    .send({ username: "admin", password: "12345" });
 
   const cookies = loginRes.headers["set-cookie"] || [];
 
@@ -45,14 +40,14 @@ beforeAll(async () => {
     cookie.startsWith("refresh_token")
   );
 
-  expect(accessTokenCookie).toBeDefined(); // Test ini akan gagal kalau login gagal
-  expect(refreshTokenCookie).toBeDefined(); // Pastikan refresh_token juga ada
+  expect(accessTokenCookie).toBeDefined();
+  expect(refreshTokenCookie).toBeDefined();
 
   if (accessTokenCookie) {
-    access_token = accessTokenCookie.split(";")[0]; // Simpan access_token
+    access_token = accessTokenCookie.split(";")[0];
   }
   if (refreshTokenCookie) {
-    refresh_token = refreshTokenCookie.split(";")[0]; // Simpan refresh_token
+    refresh_token = refreshTokenCookie.split(";")[0];
   }
 });
 
@@ -68,7 +63,6 @@ afterEach(async () => {
 
 describe("GET /api/orders", () => {
   test("Should return a list of orders (success)", async () => {
-    // Tambahkan data dummy
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
@@ -116,7 +110,6 @@ describe("GET /api/orders", () => {
   });
 
   test("Should filter orders by status", async () => {
-    // Tambahkan data dummy
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
@@ -208,14 +201,12 @@ describe("GET /api/orders", () => {
 
 describe("POST /api/orders", () => {
   test("Should create a new order (success)", async () => {
-    // Tambahkan data dummy produk
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
       category: "Bahan Pokok",
     });
 
-    // Login sebagai outlet
     const outlet = await db.collection("users").insertOne({
       username: "outlet1",
       password: hashPassword("12345"),
@@ -252,7 +243,6 @@ describe("POST /api/orders", () => {
   });
 
   test("Should return 403 if user is not authorized", async () => {
-    // Login sebagai driver
     const driver = await db.collection("users").insertOne({
       username: "driver1",
       password: hashPassword("12345"),
@@ -305,14 +295,12 @@ describe("POST /api/orders", () => {
   });
 
   test("Should handle errors gracefully", async () => {
-    // Simulasikan error dengan memmock OrderModel.postOrder
     jest
       .spyOn(require("../models/order.model"), "postOrder")
       .mockImplementationOnce(() => {
         throw new Error("Database error");
       });
 
-    // Login sebagai outlet
     const outlet = await db.collection("users").insertOne({
       username: "outlet1",
       password: hashPassword("12345"),
@@ -348,7 +336,6 @@ describe("POST /api/orders", () => {
 
 describe("GET /api/orders/:id", () => {
   test("Should return a single order by ID (success)", async () => {
-    // Tambahkan data dummy produk
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
@@ -398,7 +385,7 @@ describe("GET /api/orders/:id", () => {
 
   test("Should return 404 if order not found", async () => {
     const res = await request(app)
-      .get(`/api/orders/${new ObjectId()}`) // ID valid tetapi tidak ada di database
+      .get(`/api/orders/${new ObjectId()}`)
       .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(404);
@@ -407,7 +394,7 @@ describe("GET /api/orders/:id", () => {
 
   test("Should return 400 if ID is invalid", async () => {
     const res = await request(app)
-      .get("/api/orders/invalid-id") // ID tidak valid
+      .get("/api/orders/invalid-id")
       .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(400);
@@ -422,7 +409,6 @@ describe("GET /api/orders/:id", () => {
   });
 
   test("Should handle errors gracefully", async () => {
-    // Simulasikan error dengan memmock OrderModel.getOrderById
     jest
       .spyOn(require("../models/order.model"), "getOrderById")
       .mockImplementationOnce(() => {
@@ -440,7 +426,6 @@ describe("GET /api/orders/:id", () => {
 
 describe("PATCH /api/orders/:id", () => {
   test("Should update order status (success)", async () => {
-    // Tambahkan data dummy produk
     const product = await db.collection("products").insertOne({
       name: "Product A",
       unit: "pcs",
@@ -493,7 +478,7 @@ describe("PATCH /api/orders/:id", () => {
 
   test("Should return 404 if order not found", async () => {
     const res = await request(app)
-      .patch(`/api/orders/${new ObjectId()}`) // ID valid tetapi tidak ada di database
+      .patch(`/api/orders/${new ObjectId()}`)
       .set("Cookie", [access_token])
       .send({
         status: "completed",
@@ -505,7 +490,7 @@ describe("PATCH /api/orders/:id", () => {
 
   test("Should return 400 if ID is invalid", async () => {
     const res = await request(app)
-      .patch("/api/orders/invalid-id") // ID tidak valid
+      .patch("/api/orders/invalid-id")
       .set("Cookie", [access_token])
       .send({
         status: "completed",
@@ -525,7 +510,6 @@ describe("PATCH /api/orders/:id", () => {
   });
 
   test("Should handle errors gracefully", async () => {
-    // Simulasikan error dengan memmock OrderModel.patchOrderStatus
     jest
       .spyOn(require("../models/order.model"), "patchOrderStatus")
       .mockImplementationOnce(() => {
@@ -546,19 +530,16 @@ describe("PATCH /api/orders/:id", () => {
 
 describe("PATCH /api/orders/:id/driver", () => {
   test("Should assign a driver to an order (success)", async () => {
-    // Tambahkan data dummy driver
     const driverInsertResult = await db.collection("users").insertOne({
       username: "driver1",
       password: hashPassword("12345"),
       role: "driver",
     });
 
-    // Ambil data lengkap driver dari database
     const driver = await db
       .collection("users")
       .findOne({ _id: driverInsertResult.insertedId });
 
-    // Tambahkan data dummy order
     const order = await db.collection("orders").insertOne({
       driverId: null,
       outletId: new ObjectId(),
@@ -573,7 +554,7 @@ describe("PATCH /api/orders/:id/driver", () => {
       .patch(`/api/orders/${order.insertedId}/driver`)
       .set("Cookie", [access_token])
       .send({
-        driverId: driver._id.toString(), // ID driver yang valid
+        driverId: driver._id.toString(),
       });
 
     expect(res.statusCode).toBe(200);
@@ -598,7 +579,7 @@ describe("PATCH /api/orders/:id/driver", () => {
       .patch(`/api/orders/${order.insertedId}/driver`)
       .set("Cookie", [access_token])
       .send({
-        driverId: new ObjectId().toString(), // ID valid tetapi tidak ada di database
+        driverId: new ObjectId().toString(),
       });
 
     expect(res.statusCode).toBe(404);
@@ -613,7 +594,7 @@ describe("PATCH /api/orders/:id/driver", () => {
     });
 
     const res = await request(app)
-      .patch(`/api/orders/${new ObjectId()}/driver`) // ID valid tetapi tidak ada di database
+      .patch(`/api/orders/${new ObjectId()}/driver`)
       .set("Cookie", [access_token])
       .send({
         driverId: driver.insertedId.toString(),
@@ -631,7 +612,7 @@ describe("PATCH /api/orders/:id/driver", () => {
     });
 
     const res = await request(app)
-      .patch("/api/orders/invalid-id/driver") // ID tidak valid
+      .patch("/api/orders/invalid-id/driver")
       .set("Cookie", [access_token])
       .send({
         driverId: driver.insertedId.toString(),
@@ -669,7 +650,6 @@ describe("PATCH /api/orders/:id/driver", () => {
   });
 
   test("Should handle errors gracefully", async () => {
-    // Simulasikan error dengan memmock OrderModel.patchOrderDriver
     jest
       .spyOn(require("../models/order.model"), "patchOrderDriver")
       .mockImplementationOnce(() => {
