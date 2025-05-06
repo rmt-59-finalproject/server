@@ -9,11 +9,3 @@ describe("GET /api", () => {
     expect(response.body).toHaveProperty("message", "Stockify API");
   });
 });
-
-// test("sample test", () => {
-//   expect(1 + 1).toBe(2);
-// });
-
-// it("should run a basic test", () => {
-//   expect(true).toBe(true);
-// });
