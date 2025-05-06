@@ -24,10 +24,7 @@ class OutletModel {
           },
         },
         {
-          $unwind: {
-            path: "$driver",
-            preserveNullAndEmptyArrays: true,
-          },
+          $unwind: "$driver",
         },
         {
           $lookup: {
@@ -113,10 +110,7 @@ class OutletModel {
             },
           },
           {
-            $unwind: {
-              path: "$driver",
-              preserveNullAndEmptyArrays: true,
-            },
+            $unwind: "$driver",
           },
           {
             $lookup: {
