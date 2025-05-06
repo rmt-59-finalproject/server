@@ -186,7 +186,7 @@ class OutletModel {
         },
         {
           $set: {
-            "items.$.checkedByDriver": status === "true" ? true : false,
+            "items.$.checkedByOutlet": status === "true" ? true : false,
             "items.$.outletCheckTime": new Date(),
             updatedAt: new Date(),
           },
