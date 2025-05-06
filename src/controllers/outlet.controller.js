@@ -8,6 +8,10 @@ class OutletController {
 
       const order = await OutletModel.getAllOrders(outletId, status);
 
+      if (order.length === 0) {
+        throw { name: "NotFound", message: "Order not found!" };
+      }
+
       res.status(200).json(order);
     } catch (error) {
       next(error);
