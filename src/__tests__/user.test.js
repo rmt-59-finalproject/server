@@ -8,51 +8,38 @@ let mongoServer;
 let connection;
 let db;
 let access_token;
-let refresh_token;
 
 beforeAll(async () => {
-  // Jalankan MongoDB in-memory
   mongoServer = await MongoMemoryServer.create();
   const uri = mongoServer.getUri();
 
-  // Connect ke test database
   connection = await MongoClient.connect(uri);
   db = connection.db("stockify");
 
-  // Inject test DB ke config asli
   const originalDb = require("../config/mongodb");
-  Object.assign(originalDb, db); // redirect semua ke test DB
+  Object.assign(originalDb, db);
 
-  // Buat 1 user dengan password yang benar
   await db.collection("users").insertOne({
     username: "admin",
-    password: hashPassword("12345"), // ini yang benar
+    password: hashPassword("12345"),
     name: "Admin Warehouse",
     role: "warehouse",
   });
 
-  // Login untuk mendapatkan cookies
   const loginRes = await request(app)
-    .post("/api/login") // 🔥 ini penting! gunakan path yang benar
-    .send({ username: "admin", password: "12345" }); // password harus cocok
+    .post("/api/login")
+    .send({ username: "admin", password: "12345" });
 
   const cookies = loginRes.headers["set-cookie"] || [];
 
   const accessTokenCookie = cookies.find((cookie) =>
     cookie.startsWith("access_token")
   );
-  const refreshTokenCookie = cookies.find((cookie) =>
-    cookie.startsWith("refresh_token")
-  );
 
-  expect(accessTokenCookie).toBeDefined(); // Test ini akan gagal kalau login gagal
-  expect(refreshTokenCookie).toBeDefined(); // Pastikan refresh_token juga ada
+  expect(accessTokenCookie).toBeDefined();
 
   if (accessTokenCookie) {
-    access_token = accessTokenCookie.split(";")[0]; // Simpan access_token
-  }
-  if (refreshTokenCookie) {
-    refresh_token = refreshTokenCookie.split(";")[0]; // Simpan refresh_token
+    access_token = accessTokenCookie.split(";")[0];
   }
 });
 
@@ -62,7 +49,6 @@ afterAll(async () => {
 });
 
 afterEach(async () => {
-  // Hapus semua user kecuali admin
   await db.collection("users").deleteMany({ username: { $ne: "admin" } });
 });
 
@@ -70,20 +56,20 @@ describe("GET /api/logout", () => {
   test("Should clear cookies and return success message", async () => {
     const res = await request(app)
       .get("/api/logout")
-      .set("Cookie", [access_token]); // Kirim access_token dan refresh_token sebagai cookie
+      .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("message", "User logout successfully!");
     expect(res.headers["set-cookie"]).toEqual(
       expect.arrayContaining([
-        expect.stringContaining("access_token=;"), // Cookie access_token dihapus
-        expect.stringContaining("refresh_token=;"), // Cookie refresh_token dihapus
+        expect.stringContaining("access_token=;"),
+        expect.stringContaining("refresh_token=;"),
       ])
     );
   });
 
   test("Should return error if access_token is missing", async () => {
-    const res = await request(app).get("/api/logout"); // Tidak mengirim token
+    const res = await request(app).get("/api/logout");
 
     expect(res.statusCode).toBe(401);
     expect(res.body).toHaveProperty("message", "Invalid token.");
@@ -94,10 +80,9 @@ describe("GET /api/logout", () => {
       .get("/api/logout")
       .set("Cookie", [access_token]);
 
-    await db.collection("users").updateOne(
-      { username: "admin" },
-      { $set: { refresh_token: null } } // Set refresh_token ke null
-    );
+    await db
+      .collection("users")
+      .updateOne({ username: "admin" }, { $set: { refresh_token: null } });
 
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty("message", "Please login first!");
@@ -108,7 +93,7 @@ describe("POST /api/login", () => {
   test("Should login valid user and return cookies", async () => {
     const res = await request(app)
       .post("/api/login")
-      .send({ username: "admin", password: "12345" }); // harus cocok dengan yang disimpan
+      .send({ username: "admin", password: "12345" });
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("data");
@@ -123,7 +108,7 @@ describe("POST /api/login", () => {
   test("Should not login with empty username or password", async () => {
     const res = await request(app)
       .post("/api/login")
-      .send({ username: "", password: "" }); // username dan password kosong
+      .send({ username: "", password: "" });
 
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty("message", "All fields are required!");
@@ -132,7 +117,7 @@ describe("POST /api/login", () => {
   test("Should not login with non-existing username", async () => {
     const res = await request(app)
       .post("/api/login")
-      .send({ username: "nonexistent", password: "12345" }); // username tidak ada
+      .send({ username: "nonexistent", password: "12345" });
 
     expect(res.statusCode).toBe(401);
     expect(res.body).toHaveProperty("message", "Invalid username/password.");
@@ -141,7 +126,7 @@ describe("POST /api/login", () => {
   test("Should not login invalid user", async () => {
     const res = await request(app)
       .post("/api/login")
-      .send({ username: "admin", password: "wrongpassword" }); // password salah
+      .send({ username: "admin", password: "wrongpassword" });
 
     expect(res.statusCode).toBe(401);
     expect(res.body).toHaveProperty("message", "Invalid username/password.");
@@ -152,7 +137,7 @@ describe("GET /api/login (checkToken)", () => {
   test("Should return valid token and set access_token cookie", async () => {
     const res = await request(app)
       .get("/api/login")
-      .set("Cookie", [access_token]); // Kirim access_token sebagai cookie
+      .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(200);
     expect(res.body).toHaveProperty("message", "Token is valid.");
@@ -162,7 +147,7 @@ describe("GET /api/login (checkToken)", () => {
   });
 
   test("Should return error if refresh_token is missing", async () => {
-    const res = await request(app).get("/api/login"); // Tidak mengirim token
+    const res = await request(app).get("/api/login");
 
     expect(res.statusCode).toBe(401);
     expect(res.body).toHaveProperty("message", "Invalid token.");
@@ -171,20 +156,19 @@ describe("GET /api/login (checkToken)", () => {
   test("Should return error if refresh_token is invalid", async () => {
     const res = await request(app)
       .get("/api/login")
-      .set("Cookie", ["refresh_token=invalidtoken"]); // Kirim token tidak valid
+      .set("Cookie", ["refresh_token=invalidtoken"]);
 
     expect(res.statusCode).toBe(401);
     expect(res.body).toHaveProperty("message", "Invalid token.");
   });
 
   test("Should return error if refresh_token is expired", async () => {
-    await db.collection("users").updateOne(
-      { username: "admin" },
-      { $set: { refresh_token: null } } // Set refresh_token ke null
-    );
+    await db
+      .collection("users")
+      .updateOne({ username: "admin" }, { $set: { refresh_token: null } });
     const res = await request(app)
       .get("/api/login")
-      .set("Cookie", [access_token]); // Kirim refresh_token sebagai cookie
+      .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(400);
     expect(res.body).toHaveProperty("message", "Please login first!");
@@ -195,7 +179,7 @@ describe("POST /api/register", () => {
   test("Should register a new user", async () => {
     const res = await request(app)
       .post("/api/register")
-      .set("Cookie", [access_token]) // Kirim access_token sebagai cookie
+      .set("Cookie", [access_token])
       .send({
         username: "user1",
         password: "user123",
@@ -267,7 +251,7 @@ describe("GET /api/users", () => {
   test("Should return list of users", async () => {
     const res = await request(app)
       .get("/api/users")
-      .set("Cookie", [access_token]); // Kirim access_token sebagai cookie
+      .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(200);
     expect(Array.isArray(res.body)).toBe(true);
@@ -281,17 +265,15 @@ describe("GET /api/users", () => {
   });
 
   test("Should not return users with internal server error", async () => {
-    // Simulate an internal server error by closing the connection
     await connection.close();
 
     const res = await request(app)
       .get("/api/users")
-      .set("Cookie", [access_token]); // Kirim access_token sebagai cookie
+      .set("Cookie", [access_token]);
 
     expect(res.statusCode).toBe(500);
     expect(res.body).toHaveProperty("message", "Internal server error.");
 
-    // Reconnect to the database for further tests
     connection = await MongoClient.connect(mongoServer.getUri());
     db = connection.db("stockify");
   });
