@@ -8,7 +8,6 @@ let mongoServer;
 let connection;
 let db;
 let access_token;
-let refresh_token;
 
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
@@ -35,9 +34,6 @@ beforeAll(async () => {
 
   const accessTokenCookie = cookies.find((cookie) =>
     cookie.startsWith("access_token")
-  );
-  const refreshTokenCookie = cookies.find((cookie) =>
-    cookie.startsWith("refresh_token")
   );
 
   expect(accessTokenCookie).toBeDefined();
