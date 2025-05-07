@@ -110,7 +110,10 @@ class OutletModel {
             },
           },
           {
-            $unwind: "$driver",
+            $unwind: {
+              path: "$driver",
+              preserveNullAndEmptyArrays: true,
+            }
           },
           {
             $lookup: {

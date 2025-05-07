@@ -17,7 +17,7 @@ function parseOrder(order) {
   return {
     orderId: order.orderId,
     outletId: new ObjectId(order.outletId),
-    driverId: new ObjectId(order.driverId),
+    driverId: order.driverId ? new ObjectId(order.driverId) : null,
     items: order.items.map(parseItem),
     status: order.status || "requested",
     createdAt: new Date(order.createdAt),
