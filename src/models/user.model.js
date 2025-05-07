@@ -1,6 +1,10 @@
 const db = require("../config/mongodb");
 const { hashPassword, comparePassword } = require("../helpers/bcrypt");
-const { signAccessToken, signRefreshToken, verifyRefreshToken } = require("../helpers/jwt");
+const {
+  signAccessToken,
+  signRefreshToken,
+  verifyRefreshToken,
+} = require("../helpers/jwt");
 
 class UserModel {
   static collection() {
@@ -23,7 +27,7 @@ class UserModel {
         password: hashPassword(password),
         role,
         name,
-        refresh_token: null
+        refresh_token: null,
       });
 
       return newUser;
@@ -39,7 +43,7 @@ class UserModel {
 
       // If user doesnt exist, throw an error
       if (!user) {
-        throw { name: 'Unauthorized', message: 'Invalid username/password.' }
+        throw { name: "Unauthorized", message: "Invalid username/password." };
       }
 
       // Check if password valid
@@ -47,7 +51,7 @@ class UserModel {
 
       // If password invalid, throw an error
       if (!isValidPassword) {
-        throw { name: 'Unauthorized', message: 'Invalid username/password.' }
+        throw { name: "Unauthorized", message: "Invalid username/password." };
       }
 
       // Generate access and refresh tokens
@@ -64,7 +68,7 @@ class UserModel {
         access_token,
         refresh_token,
         name: user.name,
-        role: user.role
+        role: user.role,
       };
     } catch (error) {
       throw error;
@@ -96,8 +100,8 @@ class UserModel {
         access_token,
         name: user.name,
         role: user.role,
-        username: user.username
-      }
+        username: user.username,
+      };
     } catch (error) {
       throw error;
     }
@@ -120,7 +124,7 @@ class UserModel {
       );
 
       return {
-        message: "User logout successfully!"
+        message: "User logout successfully!",
       };
     } catch (error) {
       throw error;
@@ -133,150 +137,147 @@ class UserModel {
         {
           $project: {
             refresh_token: 0,
-            password: 0
-          }
-        }
+            password: 0,
+          },
+        },
       ];
 
       if (role) {
-        pipeline.pop()
+        pipeline.pop();
 
         pipeline.push(
           {
             $match: {
-              role
-            }
+              role,
+            },
           },
           {
             $lookup: {
               from: "orders",
               localField: "_id",
               foreignField: `${role}Id`,
-              as: "orders"
-            }
+              as: "orders",
+            },
           },
           {
             $unwind: {
               path: "$orders",
-              preserveNullAndEmptyArrays: true
-            }
+              preserveNullAndEmptyArrays: true,
+            },
           },
           {
             $group: {
               _id: "$_id",
               username: {
-                $first: "$username"
+                $first: "$username",
               },
               name: {
-                $first: "$name"
+                $first: "$name",
               },
               role: {
-                $first: "$role"
+                $first: "$role",
               },
               requested: {
                 $sum: {
                   $cond: [
                     {
-                      $eq: ["$orders.status", "requested"]
+                      $eq: ["$orders.status", "requested"],
                     },
                     1,
-                    0
-                  ]
-                }
+                    0,
+                  ],
+                },
               },
               approved: {
                 $sum: {
                   $cond: [
                     {
-                      $eq: ["$orders.status", "approved"]
+                      $eq: ["$orders.status", "approved"],
                     },
                     1,
-                    0
-                  ]
-                }
+                    0,
+                  ],
+                },
               },
               in_transit: {
                 $sum: {
                   $cond: [
                     {
-                      $eq: [
-                        "$orders.status",
-                        "in_transit"
-                      ]
+                      $eq: ["$orders.status", "in_transit"],
                     },
                     1,
-                    0
-                  ]
-                }
+                    0,
+                  ],
+                },
               },
               delivered: {
                 $sum: {
                   $cond: [
                     {
-                      $eq: ["$orders.status", "delivered"]
+                      $eq: ["$orders.status", "delivered"],
                     },
                     1,
-                    0
-                  ]
-                }
+                    0,
+                  ],
+                },
               },
               completed: {
                 $sum: {
                   $cond: [
                     {
-                      $eq: ["$orders.status", "completed"]
+                      $eq: ["$orders.status", "completed"],
                     },
                     1,
-                    0
-                  ]
-                }
+                    0,
+                  ],
+                },
               },
               rejected: {
                 $sum: {
                   $cond: [
                     {
-                      $eq: ["$orders.status", "rejected"]
+                      $eq: ["$orders.status", "rejected"],
                     },
                     1,
-                    0
-                  ]
-                }
-              }
-            }
+                    0,
+                  ],
+                },
+              },
+            },
           },
           {
             $project: {
-              _id: 0,
+              _id: 1,
               username: 1,
               name: 1,
               role: 1,
               statistics: {
                 $cond: [
                   {
-                    $eq: ["$role", "outlet"]
+                    $eq: ["$role", "outlet"],
                   },
                   {
                     requested: "$requested",
                     approved: "$approved",
                     completed: "$completed",
-                    rejected: "$rejected"
+                    rejected: "$rejected",
                   },
                   {
                     approved: "$approved",
                     in_transit: "$in_transit",
                     delivered: "$delivered",
-                    rejected: "$rejected"
-                  }
-                ]
-              }
-            }
+                    rejected: "$rejected",
+                  },
+                ],
+              },
+            },
           }
-        )
+        );
       }
 
       const users = await this.collection().aggregate(pipeline).toArray();
 
-      return users
+      return users;
     } catch (error) {
       throw error;
     }
