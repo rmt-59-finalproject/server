@@ -162,7 +162,10 @@ class OrderModel {
             },
           },
           {
-            $unwind: "$driver",
+            $unwind: {
+              path: "$driver",
+              preserveNullAndEmptyArrays: true,
+            },
           },
           {
             $lookup: {
