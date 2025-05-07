@@ -127,7 +127,7 @@
     "_id": "681530c8a4ec45eeaa7eff99",
     "orderId": "ORD-84A267",
     "outletId": "68136e13e9e1724a0444d9fe",
-    "driverId": "68136e13e9e1724a0444d9fb",
+    "driverId": null,
     "status": "requested",
     "items": [
       {
@@ -267,7 +267,7 @@
     "_id": "681530c8a4ec45eeaa7eff9d",
     "orderId": "ORD-53B3A4",
     "outletId": "68136e13e9e1724a0444d9ff",
-    "driverId": "68136e13e9e1724a0444d9fc",
+    "driverId": null,
     "status": "approved",
     "items": [
       {
@@ -286,7 +286,7 @@
     "_id": "681530c8a4ec45eeaa7eff9e",
     "orderId": "ORD-913160",
     "outletId": "68136e13e9e1724a0444d9fd",
-    "driverId": "68136e13e9e1724a0444d9fa",
+    "driverId": null,
     "status": "requested",
     "items": [
       {
@@ -421,7 +421,7 @@
     "_id": "681530c8a4ec45eeaa7effa3",
     "orderId": "ORD-F20B76",
     "outletId": "68136e13e9e1724a0444d9ff",
-    "driverId": "68136e13e9e1724a0444d9fc",
+    "driverId": null,
     "status": "requested",
     "items": [
       {
@@ -588,7 +588,7 @@
     "_id": "681530c8a4ec45eeaa7effa8",
     "orderId": "ORD-082F62",
     "outletId": "68136e13e9e1724a0444d9fe",
-    "driverId": "68136e13e9e1724a0444d9fb",
+    "driverId": null,
     "status": "requested",
     "items": [
       {

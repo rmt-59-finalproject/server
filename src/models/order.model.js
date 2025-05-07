@@ -115,7 +115,7 @@ class OrderModel {
       }));
 
       await this.collection().insertOne({
-        orderId: `ORD-${require('crypto').randomBytes(3).toString().toUpperCase()}`,
+        orderId: `ORD-${require('crypto').randomBytes(3).toString('hex').toUpperCase()}`,
         outletId: new ObjectId(outletId),
         driverId: null,
         notes: "",

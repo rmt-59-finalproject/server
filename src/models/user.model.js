@@ -44,7 +44,7 @@ class UserModel {
 
       // Check if password valid
       const isValidPassword = comparePassword(password, user.password);
-      
+
       // If password invalid, throw an error
       if (!isValidPassword) {
         throw { name: 'Unauthorized', message: 'Invalid username/password.' }
@@ -129,18 +129,152 @@ class UserModel {
 
   static async getAllUsers(role) {
     try {
-      const option = {};
+      const pipeline = [
+        {
+          $project: {
+            refresh_token: 0,
+            password: 0
+          }
+        }
+      ];
 
       if (role) {
-        option.role = role
+        pipeline.pop()
+
+        pipeline.push(
+          {
+            $match: {
+              role
+            }
+          },
+          {
+            $lookup: {
+              from: "orders",
+              localField: "_id",
+              foreignField: `${role}Id`,
+              as: "orders"
+            }
+          },
+          {
+            $unwind: {
+              path: "$orders",
+              preserveNullAndEmptyArrays: true
+            }
+          },
+          {
+            $group: {
+              _id: "$_id",
+              username: {
+                $first: "$username"
+              },
+              name: {
+                $first: "$name"
+              },
+              role: {
+                $first: "$role"
+              },
+              requested: {
+                $sum: {
+                  $cond: [
+                    {
+                      $eq: ["$orders.status", "requested"]
+                    },
+                    1,
+                    0
+                  ]
+                }
+              },
+              approved: {
+                $sum: {
+                  $cond: [
+                    {
+                      $eq: ["$orders.status", "approved"]
+                    },
+                    1,
+                    0
+                  ]
+                }
+              },
+              in_transit: {
+                $sum: {
+                  $cond: [
+                    {
+                      $eq: [
+                        "$orders.status",
+                        "in_transit"
+                      ]
+                    },
+                    1,
+                    0
+                  ]
+                }
+              },
+              delivered: {
+                $sum: {
+                  $cond: [
+                    {
+                      $eq: ["$orders.status", "delivered"]
+                    },
+                    1,
+                    0
+                  ]
+                }
+              },
+              completed: {
+                $sum: {
+                  $cond: [
+                    {
+                      $eq: ["$orders.status", "completed"]
+                    },
+                    1,
+                    0
+                  ]
+                }
+              },
+              rejected: {
+                $sum: {
+                  $cond: [
+                    {
+                      $eq: ["$orders.status", "rejected"]
+                    },
+                    1,
+                    0
+                  ]
+                }
+              }
+            }
+          },
+          {
+            $project: {
+              _id: 0,
+              username: 1,
+              name: 1,
+              role: 1,
+              statistics: {
+                $cond: [
+                  {
+                    $eq: ["$role", "outlet"]
+                  },
+                  {
+                    requested: "$requested",
+                    approved: "$approved",
+                    completed: "$completed",
+                    rejected: "$rejected"
+                  },
+                  {
+                    approved: "$approved",
+                    in_transit: "$in_transit",
+                    delivered: "$delivered",
+                    rejected: "$rejected"
+                  }
+                ]
+              }
+            }
+          }
+        )
       }
 
-      const users = await this.collection().find(option, {
-        projection: {
-          password: 0,
-          refresh_token: 0,
-        }
-      }).toArray();
+      const users = await this.collection().aggregate(pipeline).toArray();
 
       return users
     } catch (error) {

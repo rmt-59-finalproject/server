@@ -6,10 +6,6 @@ class OrderController {
       const { status } = req.query;
       const data = await OrderModel.getAllOrders(status);
 
-      if (data.length === 0) res.status(404).json({
-        message: 'No orders found.'
-      });
-
       res.status(200).json(data)
     } catch (error) {
       next(error);
