@@ -24,7 +24,10 @@ class OutletModel {
           },
         },
         {
-          $unwind: "$driver",
+          $unwind: {
+            path: "$driver",
+            preserveNullAndEmptyArrays: true,
+          },
         },
         {
           $lookup: {
@@ -48,8 +51,8 @@ class OutletModel {
         {
           $group: {
             _id: "$_id",
-            'orderId': {
-              '$first': '$orderId'
+            orderId: {
+              $first: "$orderId",
             },
             driver: { $first: "$driver" },
             outlet: { $first: "$outlet" },
@@ -113,7 +116,7 @@ class OutletModel {
             $unwind: {
               path: "$driver",
               preserveNullAndEmptyArrays: true,
-            }
+            },
           },
           {
             $lookup: {
@@ -137,8 +140,8 @@ class OutletModel {
           {
             $group: {
               _id: "$_id",
-              'orderId': {
-                '$first': '$orderId'
+              orderId: {
+                $first: "$orderId",
               },
               driver: { $first: "$driver" },
               outlet: { $first: "$outlet" },

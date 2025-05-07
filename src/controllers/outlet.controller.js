@@ -8,9 +8,9 @@ class OutletController {
 
       const order = await OutletModel.getAllOrders(outletId, status);
 
-      if (order.length === 0) {
-        throw { name: "NotFound", message: "Order not found!" };
-      }
+      // if (order.length === 0) {
+      //   throw { name: "NotFound", message: "Order not found!" };
+      // }
 
       res.status(200).json(order);
     } catch (error) {
@@ -38,11 +38,11 @@ class OutletController {
       const { productId, status } = req.body;
 
       if (!productId) {
-        throw { name: 'BadRequest', message: 'Product ID is required.' }
+        throw { name: "BadRequest", message: "Product ID is required." };
       }
-      
+
       if (!status) {
-        throw { name: 'BadRequest', message: 'Status is required.' }
+        throw { name: "BadRequest", message: "Status is required." };
       }
 
       const { name, quantity, unit } = await OutletModel.updateItemStatus(
@@ -53,7 +53,9 @@ class OutletController {
       );
 
       res.status(200).json({
-        message: `Outlet ${status === 'true' ? 'checked' : 'unchecked'} ${quantity} ${unit} of ${name}.`,
+        message: `Outlet ${
+          status === "true" ? "checked" : "unchecked"
+        } ${quantity} ${unit} of ${name}.`,
       });
     } catch (error) {
       next(error);
