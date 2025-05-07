@@ -21,4 +21,13 @@ const productSchema = z
   })
   .passthrough();
 
-module.exports = productSchema;
+const productUpdateSchema = z
+  .object({
+    stock: z.number().nonnegative("Stock cannot be negative").optional(),
+  })
+  .passthrough();
+
+module.exports = {
+  productSchema,
+  productUpdateSchema,
+};

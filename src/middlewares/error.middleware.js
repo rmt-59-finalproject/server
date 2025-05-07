@@ -1,7 +1,7 @@
 const { ZodError } = require("zod");
 
 function errorMiddleware(error, req, res, next) {
-  console.log(error, "<<<<");
+  console.log(error, "<<<< error");
 
   if (error.name === "NotFound") {
     return res.status(404).json({ message: error.message });
@@ -32,13 +32,13 @@ function errorMiddleware(error, req, res, next) {
   }
 
   if (error instanceof ZodError) {
-    const messages = error.errors[0].message.toLowerCase();
-    const path = error.errors[0].path[0];
-    const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+    const messages = error.errors.map((err) => {
+      const path = err.path[0];
+      const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
+      return `${capitalize(path)}: ${err.message.toLowerCase()}`;
+    });
 
-    return res
-      .status(400)
-      .json({ message: `${capitalize(path)} is ${messages}` });
+    return res.status(400).json({ message: messages.join(", ") });
   }
 
   if (error.name === "InvalidId") {
