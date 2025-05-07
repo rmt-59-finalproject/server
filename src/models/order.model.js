@@ -51,6 +51,9 @@ class OrderModel {
         {
           $group: {
             _id: "$_id",
+            orderId: {
+              $first: "$orderId",
+            },
             driver: {
               $first: "$driver",
             },
@@ -189,6 +192,9 @@ class OrderModel {
           {
             $group: {
               _id: "$_id",
+              orderId: {
+                $first: "$orderId",
+              },
               driver: {
                 $first: "$driver",
               },
