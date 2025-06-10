@@ -6,6 +6,7 @@ router.get("/", (req, res) => {
   res.status(200).json({
     message: "Stockify API",
     version: "1.0.0",
+    team: ["Muh. Zainal Abidin", "Moses Simanungkalit", "Abdul Hafizh"],
   });
 });
 
