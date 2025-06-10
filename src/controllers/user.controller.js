@@ -8,13 +8,13 @@ class UserController {
 
       // Validate input data
       if (!username || !password || !role || !name) {
-        throw { name: 'BadRequest', message: 'All fields are required!' };
+        throw { name: "BadRequest", message: "All fields are required!" };
       }
 
       await UserModel.createUser(username, password, name, role);
 
       res.status(201).json({
-        message: `User with role ${role} created successfully!`
+        message: `User with role ${role} created successfully!`,
       });
     } catch (error) {
       next(error);
@@ -28,33 +28,38 @@ class UserController {
 
       // Validate input data
       if (!username || !password) {
-        throw { name: 'BadRequest', message: 'All fields are required!' };
+        throw { name: "BadRequest", message: "All fields are required!" };
       }
 
       // Extract token & role if user successfully login
-      const { access_token, refresh_token, role, name } = await UserModel.login(username, password);
+      const { access_token, refresh_token, role, name } = await UserModel.login(
+        username,
+        password
+      );
 
       // Send access_token via cookie that expires in 8 hours
-      res.cookie('access_token', `Bearer ${access_token}`, {
+      res.cookie("access_token", `Bearer ${access_token}`, {
         httpOnly: true,
         secure: true,
-        maxAge: 8 * 60 * 60 * 1000
+        sameSite: "None", // Added this line
+        maxAge: 8 * 60 * 60 * 1000,
       });
 
       // Send refresh_token via cookie that expires in 1 day
-      res.cookie('refresh_token', `Bearer ${refresh_token}`, {
+      res.cookie("refresh_token", `Bearer ${refresh_token}`, {
         httpOnly: true,
         secure: true,
-        maxAge: 24 * 60 * 60 * 1000
+        sameSite: "None", // Added this line
+        maxAge: 24 * 60 * 60 * 1000,
       });
 
       res.status(200).json({
-        message: 'User login successfully!',
+        message: "User login successfully!",
         data: {
           username,
           role,
-          name
-        }
+          name,
+        },
       });
     } catch (error) {
       next(error);
@@ -68,17 +73,22 @@ class UserController {
 
       // If the access token is not present, throw an error
       if (!refresh_token) {
+        console.log("Please login first");
         throw { name: "BadRequest", message: "Please login first!" };
       }
+      console.log(refresh_token, "ada");
 
       // Check if the refresh token is valid
-      const { access_token, name, role, username } = await UserModel.checkToken(refresh_token);
+      const { access_token, name, role, username } = await UserModel.checkToken(
+        refresh_token
+      );
 
       // Set the access token in the response cookies
-      res.cookie('access_token', `Bearer ${access_token}`, {
+      res.cookie("access_token", `Bearer ${access_token}`, {
         httpOnly: true,
         secure: true,
-        maxAge: 8 * 60 * 60 * 1000
+        sameSite: "None", // Added this line
+        maxAge: 8 * 60 * 60 * 1000,
       });
 
       res.status(200).json({
@@ -86,8 +96,8 @@ class UserController {
         data: {
           username,
           role,
-          name
-        }
+          name,
+        },
       });
     } catch (error) {
       next(error);
@@ -108,8 +118,8 @@ class UserController {
       const result = await UserModel.logout(refresh_token);
 
       // Clear the cookies
-      res.clearCookie('access_token');
-      res.clearCookie('refresh_token');
+      res.clearCookie("access_token");
+      res.clearCookie("refresh_token");
       res.status(200).json({
         message: result.message,
       });
