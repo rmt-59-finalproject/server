@@ -15,9 +15,6 @@ const corsOptions = {
   allowedHeaders: "Content-Type,Authorization,X-Requested-With", // Allow common headers
 };
 
-// Handle preflight requests for all routes
-app.options("*", cors(corsOptions));
-
 // Enable CORS for all other requests
 app.use(cors(corsOptions));
 
